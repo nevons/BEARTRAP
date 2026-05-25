@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpg0foknsyof"]
+
+[ext_resource type="PackedScene" uid="uid://dp3up1qky8mfq" path="res://scenes/PLAYER.tscn" id="1_errlg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ij1v8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_errlg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_errlg"]
+albedo_color = Color(0.051971, 0.051971, 0.051971, 1)
+metallic = 0.25
+metallic_specular = 0.72
+
+[node name="Node3D" type="Node3D"]
+
+[node name="ground" type="StaticBody3D" parent="." groups=["surface_wood"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground"]
+transform = Transform3D(30, 0, 0, 0, 1, 0, 0, 0, 30, 0, 0, 0)
+shape = SubResource("BoxShape3D_ij1v8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ground/CollisionShape3D" groups=["surface_wood"]]
+mesh = SubResource("BoxMesh_errlg")
+surface_material_override/0 = SubResource("StandardMaterial3D_errlg")
+
+[node name="player" parent="." instance=ExtResource("1_errlg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 10, 6)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.113342, 0.993556, 0, -0.993556, -0.113342, 0, 12.6984, 0)
+light_energy = 12.768
+light_volumetric_fog_energy = 0.0
