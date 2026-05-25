@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4bjudmbnjtbv"]
+
+[ext_resource type="Script" uid="uid://ddcgonkumnqp6" path="res://scripts/interactable.gd" id="1_bl4sb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0bxen"]
+size = Vector3(0.1, 1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bl4sb"]
+albedo_color = Color(0.75014, 0.584284, 0.372364, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oippa"]
+
+[node name="MosinPickup" type="Area3D"]
+script = ExtResource("1_bl4sb")
+item_name = "Mosin-Nagant"
+item_enum_id = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_0bxen")
+surface_material_override/0 = SubResource("StandardMaterial3D_bl4sb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_oippa")

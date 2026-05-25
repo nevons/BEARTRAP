@@ -38,7 +38,7 @@ mesh = SubResource("BoxMesh_errlg")
 surface_material_override/0 = SubResource("StandardMaterial3D_errlg")
 
 [node name="player" parent="." instance=ExtResource("1_errlg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 10, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3.17369, 6)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.113342, 0.993556, 0, -0.993556, -0.113342, 0, 12.6984, 0)

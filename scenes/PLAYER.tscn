@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dp3up1qky8mfq"]
+[gd_scene load_steps=26 format=3 uid="uid://dp3up1qky8mfq"]
 
 [ext_resource type="Script" uid="uid://bx5vdnhgg6epu" path="res://scripts/PLAYER.gd" id="1_r53wf"]
 [ext_resource type="AudioStream" uid="uid://csktmykqk26gj" path="res://assets/audio/footstep_wood/wood1.wav" id="2_hruy7"]
@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://cld05e08hxo8t" path="res://assets/audio/footstep_default/hardboot_generic2.wav" id="15_ua83o"]
 [ext_resource type="AudioStream" uid="uid://csncb6ckbufd3" path="res://assets/audio/footstep_default/hardboot_generic8.wav" id="16_0hybe"]
 [ext_resource type="AudioStream" uid="uid://dehl06l8ys77n" path="res://assets/audio/footstep_default/hardboot_generic5.wav" id="17_n38qo"]
+[ext_resource type="Script" uid="uid://bps77v42avmy2" path="res://scripts/hand_container.gd" id="18_ua83o"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a1u3h"]
 
@@ -154,9 +155,15 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.266513, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.287777, 0)
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="CharacterBody3D/Head/Camera3D"]
 update_mode = 1
+
+[node name="InteractionRay" type="RayCast3D" parent="CharacterBody3D/Head/Camera3D"]
+
+[node name="HandContainer" type="Node3D" parent="CharacterBody3D/Head/Camera3D"]
+script = ExtResource("18_ua83o")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D"]
 libraries = {

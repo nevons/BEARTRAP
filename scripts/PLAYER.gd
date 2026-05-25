@@ -47,6 +47,8 @@ var _step_played := false
 @onready var headbbonker = $HEADBONKER
 @onready var footstep_player = $FootstepPlayer   # AudioStreamPlayer node
 @onready var footstep_ray   = $FootstepRay       # RayCast3D — target (0, -1.2, 0)
+@onready var interact_raycast = $Head/Camera3D/InteractionRayCast
+@onready var item_manager = $Head/Camera3D/HandContainer
 
 
 
@@ -72,8 +74,9 @@ func _unhandled_input(event):
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
-	#weapon switch
-	
+	#item switch
+		if event.is_action_pressed("interact"):
+			try_interaction()
 
 
 func _physics_process(delta):
@@ -138,7 +141,7 @@ func _physics_process(delta):
 
 	# Step timer runs independently — tune STEP_FREQ without touching bob or speed
 	# Step timer runs independently from headbob
-# Walking keeps normal pace, sprinting increases step frequency
+	# Walking keeps normal pace, sprinting increases step frequency
 
 	var step_speed_mult = 1.0
 
@@ -155,6 +158,15 @@ func _physics_process(delta):
 	_handle_footsteps(t_step, is_moving)
  
  
+func try_interaction():
+	if interact_raycast.is_colliding():
+		var collider = interact_raycast.get_collider()
+		if collider is Interactable:
+			# Connect the item picked up to your inventory/item manager
+			item_manager.unlock_and_equip_item(collider.item_enum_id)
+			collider.interact()
+
+
 # Smooth figure-8 style bob: vertical on every step, lateral on every two steps
 func _headbob(time: float) -> Vector3:
 	var pos = Vector3.ZERO
