@@ -1,15 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpg0foknsyof"]
+[gd_scene load_steps=10 format=3 uid="uid://bpg0foknsyof"]
 
+[ext_resource type="Texture2D" uid="uid://d0r6n1u55rnxh" path="res://assets/textures/kenney_prototype_textures/orange/texture_05.png" id="1_bl13t"]
 [ext_resource type="PackedScene" uid="uid://dp3up1qky8mfq" path="res://scenes/PLAYER.tscn" id="1_errlg"]
+[ext_resource type="Texture2D" uid="uid://csbv333007nk" path="res://assets/textures/skyboxes/skybox_blue-sky.png" id="3_iyx0m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ij1v8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_errlg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_errlg"]
-albedo_color = Color(0.051971, 0.051971, 0.051971, 1)
-metallic = 0.25
-metallic_specular = 0.72
+albedo_texture = ExtResource("1_bl13t")
+metallic_specular = 0.0
+anisotropy = -0.38
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_74lek"]
+panorama = ExtResource("3_iyx0m")
+
+[sub_resource type="Sky" id="Sky_j5jx5"]
+sky_material = SubResource("PanoramaSkyMaterial_74lek")
+
+[sub_resource type="Environment" id="Environment_bl13t"]
+background_mode = 2
+sky = SubResource("Sky_j5jx5")
 
 [node name="Node3D" type="Node3D"]
 
@@ -28,5 +42,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 10, 6)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.113342, 0.993556, 0, -0.993556, -0.113342, 0, 12.6984, 0)
-light_energy = 12.768
+light_energy = 1.213
 light_volumetric_fog_energy = 0.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bl13t")
