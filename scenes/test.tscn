@@ -13,7 +13,7 @@ metallic_specular = 0.72
 
 [node name="Node3D" type="Node3D"]
 
-[node name="ground" type="StaticBody3D" parent="." groups=["surface_wood"]]
+[node name="ground" type="StaticBody3D" parent="." groups=["surface_default"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ground"]
 transform = Transform3D(30, 0, 0, 0, 1, 0, 0, 0, 30, 0, 0, 0)

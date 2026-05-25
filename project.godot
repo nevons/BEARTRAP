@@ -17,6 +17,9 @@ config/icon="res://icon.svg"
 [global_group]
 
 surface_wood="wood surface"
+surface_metal=""
+surface_grass=""
+surface_default=""
 
 [input]
 

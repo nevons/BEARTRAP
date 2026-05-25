@@ -7,7 +7,6 @@ var speed
 @export var CROUCHED_SPEED = 1.0
 @export var WALK_SPEED = 3.0
 @export var SPRINT_SPEED = 5.0
-@export var JUMP_VELOCITY = 4.5
 
 var _is_crouching : bool = false
 
@@ -23,7 +22,9 @@ const BOB_AMP  = 0.06
 var t_bob       = 0.0
 
 # --- Footsteps ---
-# Fires once per step (when sin wave crosses below 0 = "foot down")
+# t_step is independent from t_bob so step speed can be tuned freely
+const STEP_FREQ  = 9.0   # increase to play steps faster, decrease to slow them down
+var t_step        = 0.0
 var _step_played := false
  
 # Add one AudioStream per surface type in the Inspector.
@@ -83,9 +84,6 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	# Handle Jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
 	
 	#speed and movement
 	if Input.is_action_pressed("sprint"):
@@ -137,7 +135,24 @@ func _physics_process(delta):
 		t_bob = lerp(t_bob, round(t_bob / TAU) * TAU, delta * 8.0)
  
 	cam.transform.origin = _headbob(t_bob)
-	_handle_footsteps(t_bob, is_moving)
+
+	# Step timer runs independently — tune STEP_FREQ without touching bob or speed
+	# Step timer runs independently from headbob
+# Walking keeps normal pace, sprinting increases step frequency
+
+	var step_speed_mult = 1.0
+
+	if speed == SPRINT_SPEED:
+		step_speed_mult = 1.6
+	elif speed == CROUCHED_SPEED:
+		step_speed_mult = 0.65
+
+	if is_moving:
+		t_step += delta * STEP_FREQ * step_speed_mult
+	else:
+		t_step = 0.0
+
+	_handle_footsteps(t_step, is_moving)
  
  
 # Smooth figure-8 style bob: vertical on every step, lateral on every two steps

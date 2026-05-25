@@ -1,11 +1,23 @@
-[gd_scene load_steps=13 format=3 uid="uid://dp3up1qky8mfq"]
+[gd_scene load_steps=25 format=3 uid="uid://dp3up1qky8mfq"]
 
 [ext_resource type="Script" uid="uid://bx5vdnhgg6epu" path="res://scripts/PLAYER.gd" id="1_r53wf"]
 [ext_resource type="AudioStream" uid="uid://csktmykqk26gj" path="res://assets/audio/footstep_wood/wood1.wav" id="2_hruy7"]
+[ext_resource type="AudioStream" uid="uid://c06bx2fe8w276" path="res://assets/audio/footstep_grass/grass1.wav" id="2_u2uwr"]
 [ext_resource type="Script" uid="uid://oqst4ipsqul5" path="res://scripts/Reticle.gd" id="2_wwg6x"]
+[ext_resource type="AudioStream" uid="uid://cup6dro3vm5sc" path="res://assets/audio/footstep_grass/grass2.wav" id="3_4ufat"]
 [ext_resource type="AudioStream" uid="uid://bjjx5dqe5uvwi" path="res://assets/audio/footstep_wood/wood2.wav" id="3_kbg3k"]
+[ext_resource type="AudioStream" uid="uid://wmcym51etyjs" path="res://assets/audio/footstep_grass/grass3.wav" id="4_dd1qt"]
 [ext_resource type="AudioStream" uid="uid://bn1aqjwj6p5u8" path="res://assets/audio/footstep_wood/wood3.wav" id="4_fqe5j"]
+[ext_resource type="AudioStream" uid="uid://bpjrtf81thr2g" path="res://assets/audio/footstep_grass/dirt2.wav" id="5_0pmnk"]
 [ext_resource type="AudioStream" uid="uid://cv8esenrudgyo" path="res://assets/audio/footstep_wood/wood4.wav" id="5_qoo5g"]
+[ext_resource type="AudioStream" uid="uid://bbj867pux6gsa" path="res://assets/audio/footstep_metal/metal1.wav" id="6_ubknb"]
+[ext_resource type="AudioStream" uid="uid://cxyiqr25nkrs4" path="res://assets/audio/footstep_metal/metal2.wav" id="7_54cwh"]
+[ext_resource type="AudioStream" uid="uid://cuix6nalwm35r" path="res://assets/audio/footstep_metal/metal3.wav" id="8_0k08p"]
+[ext_resource type="AudioStream" uid="uid://be0uqetecssi3" path="res://assets/audio/footstep_metal/metal4.wav" id="9_yovmp"]
+[ext_resource type="AudioStream" uid="uid://cpk0lmt1kmuv3" path="res://assets/audio/footstep_default/hardboot_generic1.wav" id="14_ib3ru"]
+[ext_resource type="AudioStream" uid="uid://cld05e08hxo8t" path="res://assets/audio/footstep_default/hardboot_generic2.wav" id="15_ua83o"]
+[ext_resource type="AudioStream" uid="uid://csncb6ckbufd3" path="res://assets/audio/footstep_default/hardboot_generic8.wav" id="16_0hybe"]
+[ext_resource type="AudioStream" uid="uid://dehl06l8ys77n" path="res://assets/audio/footstep_default/hardboot_generic5.wav" id="17_n38qo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a1u3h"]
 
@@ -126,7 +138,10 @@ _data = {
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 floor_stop_on_slope = false
 script = ExtResource("1_r53wf")
+grass_steps = Array[AudioStream]([ExtResource("2_u2uwr"), ExtResource("3_4ufat"), ExtResource("4_dd1qt"), ExtResource("5_0pmnk")])
 wood_steps = Array[AudioStream]([ExtResource("2_hruy7"), ExtResource("3_kbg3k"), ExtResource("4_fqe5j"), ExtResource("5_qoo5g")])
+metal_steps = Array[AudioStream]([ExtResource("6_ubknb"), ExtResource("7_54cwh"), ExtResource("8_0k08p"), ExtResource("9_yovmp")])
+default_steps = Array[AudioStream]([ExtResource("14_ib3ru"), ExtResource("15_ua83o"), ExtResource("16_0hybe"), ExtResource("17_n38qo")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 shape = SubResource("CapsuleShape3D_a1u3h")
