@@ -9,7 +9,7 @@ var has_flashlight: bool = false
 
 @onready var mosin_mesh = $MosinMesh
 @onready var flashlight_mesh = $FlashlightMesh
-@onready var flashlight_light = $"../BeltPosition/FlashlightLight"
+@onready var flashlight_light = $"../../../BeltPosition/FlashlightLight"
 
 func _ready():
 	# Turn everything off at the start of the game

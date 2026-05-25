@@ -47,7 +47,7 @@ var _step_played := false
 @onready var headbbonker = $HEADBONKER
 @onready var footstep_player = $FootstepPlayer   # AudioStreamPlayer node
 @onready var footstep_ray   = $FootstepRay       # RayCast3D — target (0, -1.2, 0)
-@onready var interact_raycast = $Head/Camera3D/InteractionRayCast
+@onready var interact_raycast = $Head/Camera3D/InteractionRay
 @onready var item_manager = $Head/Camera3D/HandContainer
 
 
@@ -75,8 +75,8 @@ func _unhandled_input(event):
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
 	#item switch
-		if event.is_action_pressed("interact"):
-			try_interaction()
+	if event.is_action_pressed("interact"):
+		try_interaction()
 
 
 func _physics_process(delta):

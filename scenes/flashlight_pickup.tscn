@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://df2fbff3vm337"]
+
+[ext_resource type="Script" uid="uid://ddcgonkumnqp6" path="res://scripts/interactable.gd" id="1_1uxv8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1uxv8"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1uxv8"]
+material = SubResource("StandardMaterial3D_1uxv8")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tmu4j"]
+height = 0.2
+radius = 0.1
+
+[node name="FlashlightPickup" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_1uxv8")
+item_name = "Flashlight"
+item_enum_id = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_1uxv8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_tmu4j")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
