@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://d4bjudmbnjtbv"]
+[gd_scene load_steps=6 format=3 uid="uid://d4bjudmbnjtbv"]
 
 [ext_resource type="Script" uid="uid://ddcgonkumnqp6" path="res://scripts/interactable.gd" id="1_bl4sb"]
+[ext_resource type="AudioStream" uid="uid://tfwkemtfeoq6" path="res://assets/audio/mosin_sounds/mosin_bolt_cycle.wav" id="2_oippa"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_0bxen"]
 size = Vector3(0.1, 1, 0.1)
@@ -24,3 +25,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_bl4sb")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, 0, 0)
 shape = SubResource("BoxShape3D_oippa")
+
+[node name="pickup" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_oippa")
