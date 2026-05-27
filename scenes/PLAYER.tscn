@@ -30,11 +30,11 @@ size = Vector3(0.1, 1, 0.1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0hybe"]
 albedo_color = Color(0.75014, 0.584284, 0.372364, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mvpeb"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ua83o"]
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_n38qo"]
-material = SubResource("StandardMaterial3D_mvpeb")
+material = SubResource("StandardMaterial3D_ua83o")
 top_radius = 0.1
 bottom_radius = 0.1
 height = 0.2
@@ -172,9 +172,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.266513, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.287777, 0)
-
-[node name="ReflectionProbe" type="ReflectionProbe" parent="CharacterBody3D/Head/Camera3D"]
-update_mode = 1
+current = true
 
 [node name="InteractionRay" type="RayCast3D" parent="CharacterBody3D/Head/Camera3D"]
 target_position = Vector3(0, 0, -1.5)

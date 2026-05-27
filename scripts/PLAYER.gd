@@ -43,13 +43,12 @@ var _step_played := false
 @onready var head = $Head
 @onready var cam = $Head/Camera3D
 @onready var pcap = $CollisionShape3D
-@onready var  anims= $AnimationPlayer
+@onready var anims= $AnimationPlayer
 @onready var headbbonker = $HEADBONKER
 @onready var footstep_player = $FootstepPlayer   # AudioStreamPlayer node
-@onready var footstep_ray   = $FootstepRay       # RayCast3D — target (0, -1.2, 0)
+@onready var footstep_ray   = $FootstepRay      # RayCast3D — target (0, -1.2, 0)
 @onready var interact_raycast = $Head/Camera3D/InteractionRay
 @onready var item_manager = $Head/Camera3D/HandContainer
-
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -88,17 +87,28 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 
 	
-	#speed and movement
-	if Input.is_action_pressed("sprint"):
-		speed=SPRINT_SPEED
-	elif Input.is_action_just_pressed("crouch"):
-		speed=CROUCHED_SPEED
-		_toggle_crouch()
-			
-	else:
-		speed=WALK_SPEED 
-	
+	# Get the input vector direction
 	var input_dir = Input.get_vector("left", "right","forward", "backward")
+	
+	# Determine if the player's intentional movement is strictly forward.
+	# input_dir.y < -0.5 confirms forward tracking, while abs(input_dir.x) < 0.5 
+	# ensures they aren't drastically strafing left or right.
+	var moving_forward: bool = input_dir.y < -0.5 and abs(input_dir.x) < 0.5
+	
+	# speed and movement logic
+	# Added check: cannot sprint if '_is_crouching' is true
+	if Input.is_action_pressed("sprint") and moving_forward and not _is_crouching:
+		speed = SPRINT_SPEED
+	elif Input.is_action_just_pressed("crouch"):
+		_toggle_crouch()
+		# Speed assignment is safely decoupled here to let _toggle_crouch handle state transitions
+	else:
+		# Fallback movement speeds based on current stance state
+		if _is_crouching:
+			speed = CROUCHED_SPEED
+		else:
+			speed = WALK_SPEED 
+	
 	var direction = (self.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	#inertia
@@ -131,7 +141,6 @@ func _physics_process(delta):
 		bob_speed_mult = 0.7
  
 	if is_moving:
-		# ACCUMULATE t_bob — this was the original bug (it was being set, not added)
 		t_bob += delta * BOB_FREQ * bob_speed_mult * (velocity.length() / WALK_SPEED)
 	else:
 		# Smoothly ease back to the nearest full cycle so the cam settles at origin
@@ -222,14 +231,12 @@ func _get_surface_sounds() -> Array[AudioStream]:
 	return default_steps
 	
 func _toggle_crouch():
-	
 	if _is_crouching==true and headbbonker.is_colliding()==false:
 		anims.play("crouch",-1,-CROUCH_SPEED,true)
 		speed=WALK_SPEED
 	elif _is_crouching == false:
 		anims.play("crouch",-1,CROUCH_SPEED)
 		speed=CROUCHED_SPEED
-
 
 
 func _on_animation_player_animation_started(anim_name):

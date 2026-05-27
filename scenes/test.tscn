@@ -88,9 +88,6 @@ shape = SubResource("BoxShape3D_ij1v8")
 mesh = SubResource("BoxMesh_errlg")
 surface_material_override/0 = SubResource("StandardMaterial3D_errlg")
 
-[node name="player" parent="." instance=ExtResource("1_errlg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45444, -9)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.113342, 0.993556, 0, -0.993556, -0.113342, 0, 12.6984, 0)
 light_energy = 1.213
@@ -171,3 +168,6 @@ shape = SubResource("BoxShape3D_jcd4p")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0892174, 0)
 mesh = SubResource("BoxMesh_uacia")
 surface_material_override/0 = SubResource("StandardMaterial3D_at5dv")
+
+[node name="PLAYER" parent="." instance=ExtResource("1_errlg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.87257, -7.77059)
