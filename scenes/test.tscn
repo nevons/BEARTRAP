@@ -28,6 +28,20 @@ sky_material = SubResource("PanoramaSkyMaterial_74lek")
 [sub_resource type="Environment" id="Environment_bl13t"]
 background_mode = 2
 sky = SubResource("Sky_j5jx5")
+fog_sun_scatter = 0.13
+fog_density = 0.09
+fog_aerial_perspective = 0.095
+fog_sky_affect = 0.916
+fog_height = -301.81
+fog_height_density = 1.0105
+volumetric_fog_density = 0.3
+volumetric_fog_albedo = Color(0.321728, 0.321728, 0.321728, 1)
+volumetric_fog_emission = Color(0.0253638, 0.0253638, 0.0253638, 1)
+volumetric_fog_emission_energy = 44.11
+volumetric_fog_anisotropy = -0.05
+volumetric_fog_length = 108.32
+volumetric_fog_detail_spread = 1.72305
+volumetric_fog_ambient_inject = 4.18
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_at5dv"]
 
@@ -75,7 +89,7 @@ mesh = SubResource("BoxMesh_errlg")
 surface_material_override/0 = SubResource("StandardMaterial3D_errlg")
 
 [node name="player" parent="." instance=ExtResource("1_errlg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3.17369, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45444, -9)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.113342, 0.993556, 0, -0.993556, -0.113342, 0, 12.6984, 0)
@@ -123,13 +137,37 @@ font_size = 100
 outline_size = 40
 
 [node name="wall" type="StaticBody3D" parent="."]
-transform = Transform3D(15, 0, 0, 0, 6, 0, 0, 0, 1, 0, 2.948, -36.807)
+transform = Transform3D(15, 0, 0, 0, 4.2, 0, 0, 0, 1, 0, 1.948, -36.807)
 physics_material_override = SubResource("PhysicsMaterial_lpvoh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="wall"]
 shape = SubResource("BoxShape3D_jcd4p")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="wall/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0892174, 0)
+mesh = SubResource("BoxMesh_uacia")
+surface_material_override/0 = SubResource("StandardMaterial3D_at5dv")
+
+[node name="wall2" type="StaticBody3D" parent="."]
+transform = Transform3D(-6.0584e-07, 0, 1, 0, 4.2, 0, -13.86, 0, -4.37114e-08, 7, 1.948, -29.807)
+physics_material_override = SubResource("PhysicsMaterial_lpvoh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall2"]
+shape = SubResource("BoxShape3D_jcd4p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="wall2/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0892174, 0)
+mesh = SubResource("BoxMesh_uacia")
+surface_material_override/0 = SubResource("StandardMaterial3D_at5dv")
+
+[node name="wall3" type="StaticBody3D" parent="."]
+transform = Transform3D(-6.0584e-07, 0, 1, 0, 4.2, 0, -13.86, 0, -4.37114e-08, -7, 1.948, -29.807)
+physics_material_override = SubResource("PhysicsMaterial_lpvoh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall3"]
+shape = SubResource("BoxShape3D_jcd4p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="wall3/CollisionShape3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0892174, 0)
 mesh = SubResource("BoxMesh_uacia")
 surface_material_override/0 = SubResource("StandardMaterial3D_at5dv")
