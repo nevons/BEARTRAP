@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://ddcgonkumnqp6" path="res://scripts/interactable.gd" id="1_1uxv8"]
 [ext_resource type="AudioStream" uid="uid://cwdkbgcu1chff" path="res://assets/audio/flashlight_sounds/pantoman-flashlight-click-2-487811.mp3" id="2_tmu4j"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1uxv8"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tmu4j"]
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1uxv8"]
-material = SubResource("StandardMaterial3D_1uxv8")
+material = SubResource("StandardMaterial3D_tmu4j")
 top_radius = 0.1
 bottom_radius = 0.1
 height = 0.2

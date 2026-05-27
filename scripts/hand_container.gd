@@ -9,11 +9,12 @@ var has_flashlight: bool = false
 
 @onready var mosin_mesh = $MosinMesh
 @onready var flashlight_mesh = $FlashlightMesh
-@onready var flashlight_light = $"../../../BeltPosition/FlashlightLight"
+@onready var flashlight_light_belt = $"../../../BeltPosition/FlashlightLight"
+@onready var flashlight_light_hand = $FlashlightMesh/SpotLight3D
 
 func _ready():
 	# Turn everything off at the start of the game
-	flashlight_light.visible = false
+	flashlight_light_belt.visible = false
 	update_item_visibility()
 
 func _unhandled_input(event):
@@ -31,7 +32,7 @@ func unlock_and_equip_item(item_id: int):
 		print("Mosin-Nagant acquired.")
 	elif item_id == EquippedItem.FLASHLIGHT:
 		has_flashlight = true
-		flashlight_light.visible = true # The belt light can now function
+		flashlight_light_belt.visible = true # The belt light can now function
 		switch_to(EquippedItem.FLASHLIGHT)
 		print("Flashlight acquired.")
 
@@ -40,10 +41,17 @@ func switch_to(new_item: EquippedItem):
 	update_item_visibility()
 	
 	# Light placement logic (Hand vs Belt)
-	if current_item == EquippedItem.FLASHLIGHT:
-		flashlight_light.position = Vector3(0.2, -0.2, -0.4)
+	if has_flashlight:
+		if current_item == EquippedItem.FLASHLIGHT:
+			flashlight_light_hand.visible = true
+			flashlight_light_belt.visible = false
+		else:
+			flashlight_light_hand.visible = false
+			flashlight_light_belt.visible = true
 	else:
-		flashlight_light.position = Vector3(0.2, -0.8, -0.2)
+		# If the player hasn't picked up the flashlight yet, FORCE both off!
+		flashlight_light_hand.visible = false
+		flashlight_light_belt.visible = false
 
 func update_item_visibility():
 	mosin_mesh.visible = (current_item == EquippedItem.MOSIN)

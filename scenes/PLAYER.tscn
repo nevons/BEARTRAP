@@ -30,11 +30,11 @@ size = Vector3(0.1, 1, 0.1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0hybe"]
 albedo_color = Color(0.75014, 0.584284, 0.372364, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ua83o"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1uxv8"]
 albedo_color = Color(0, 0, 0, 1)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_n38qo"]
-material = SubResource("StandardMaterial3D_ua83o")
+[sub_resource type="CylinderMesh" id="CylinderMesh_ua83o"]
+material = SubResource("StandardMaterial3D_1uxv8")
 top_radius = 0.1
 bottom_radius = 0.1
 height = 0.2
@@ -193,8 +193,13 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0hybe")
 [node name="FlashlightMesh" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/FlashlightMesh"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.36242, -0.219378, -0.602232)
-mesh = SubResource("CylinderMesh_n38qo")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.459314, -0.162117, -0.521569)
+mesh = SubResource("CylinderMesh_ua83o")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/FlashlightMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.473771, -0.16994, -0.630426)
+visible = false
+light_energy = 5.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D"]
 libraries = {
