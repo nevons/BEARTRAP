@@ -152,6 +152,7 @@ _data = {
 [node name="Node3D" type="Node3D"]
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+collision_layer = 2
 floor_stop_on_slope = false
 script = ExtResource("1_r53wf")
 grass_steps = Array[AudioStream]([ExtResource("2_u2uwr"), ExtResource("3_4ufat"), ExtResource("4_dd1qt"), ExtResource("5_0pmnk")])
@@ -242,5 +243,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.847525, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.292604, 0, -0.422618)
 
 [node name="FlashlightLight" type="SpotLight3D" parent="CharacterBody3D/BeltPosition"]
+visible = false
+light_energy = 5.0
 
 [connection signal="animation_started" from="CharacterBody3D/AnimationPlayer" to="CharacterBody3D" method="_on_animation_player_animation_started"]
