@@ -41,7 +41,7 @@ func action_fire():
 
 # Called by your player input handler when 'R' (or your cycle key) is pressed
 func action_cycle_bolt():
-	if current_state != WeaponState.NEED_BOLT:
+	'''if current_state != WeaponState.NEED_BOLT:
 		return
 		
 	current_state = WeaponState.CYCLING
@@ -88,7 +88,9 @@ func play_procedural_bolt_animation():
 	tween = create_tween().set_parallel(false)
 	tween.tween_property(bolt_mesh, "rotation_degrees:x", 0.0, 0.12).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	await tween.finished
-
+	'''
+	
+	
 # --- Juice and Feedback Placeholders ---
 func play_fire_effects():
 	# Add camera kick, muzzle flash, and audio playback here later
