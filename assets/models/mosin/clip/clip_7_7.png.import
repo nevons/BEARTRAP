@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://mxlh7pykv7h3"
+path.s3tc="res://.godot/imported/clip_7_7.png-c75430430ba1812296381e54212e5d3b.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "d5aa5608a7bd0f75a37221cceba16122"
+}
+
+[deps]
+
+source_file="res://assets/models/mosin/clip/clip_7_7.png"
+dest_files=["res://.godot/imported/clip_7_7.png-c75430430ba1812296381e54212e5d3b.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=8
+roughness/src_normal="res://assets/models/mosin/clip_7_8.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

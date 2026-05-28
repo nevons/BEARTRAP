@@ -24,13 +24,14 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("flashlight") and has_flashlight:
 		switch_to(EquippedItem.FLASHLIGHT)
 	
-	#handle mosin actions
+	# Pass Combat Inputs to the Mosin State Machine
 	if current_item == EquippedItem.MOSIN:
-		if event.is_action_pressed("fire"): # Your Left-Click project input map
-			$MosinMesh.action_fire()
-			
-		if event.is_action_pressed("reload"): # Your R Key project input map
-			$MosinMesh.action_cycle_bolt()
+		if event.is_action_pressed("fire"):
+			mosin_mesh.action_fire()
+		elif event.is_action_pressed("reload"):
+			# Send the quick-press action to the Mosin.
+			# The Mosin's _process() loop handles the "hold" calculation.
+			mosin_mesh.action_reload_pressed()
 
 # Called by the player script when interacting with the props in the cabin
 func unlock_and_equip_item(item_id: int):

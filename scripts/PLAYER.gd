@@ -9,6 +9,7 @@ var speed
 @export var SPRINT_SPEED = 5.0
 
 var _is_crouching : bool = false
+var _is_running : bool = false
 
 const sensitivity = 0.05
 
@@ -26,6 +27,21 @@ var t_bob       = 0.0
 const STEP_FREQ  = 9.0   # increase to play steps faster, decrease to slow them down
 var t_step        = 0.0
 var _step_played := false
+
+# --- Weapon Bob Settings ---
+const BOB_FREQ_IDLE = 1.5   # Lower frequency makes it feel like slow, heavy breathing
+const BOB_AMP_IDLE = 0.006  # Turning this up increases the physical range of the drift
+
+const BOB_FREQ_WALK = 12.0
+const BOB_AMP_WALK = 0.015
+
+const BOB_FREQ_RUN = 16.0
+const BOB_AMP_RUN = 0.03
+
+const BOB_FREQ_CROUCH = 6.0
+const BOB_AMP_CROUCH = 0.005
+
+var bob_timer: float = 0.0
  
 # Add one AudioStream per surface type in the Inspector.
 # Tag your floor/terrain nodes with matching groups:
@@ -79,9 +95,6 @@ func _unhandled_input(event):
 
 
 func _physics_process(delta):
-	
-	#weapons
-
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -130,6 +143,18 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
+	#checking for _is_running 
+	var wants_to_sprint = Input.is_action_pressed("sprint")
+	var is_moving_input = input_dir.length() > 0.1
+	
+	# The player is running ONLY if they want to sprint, are moving, and aren't crouching
+	if wants_to_sprint and is_moving_input and not _is_crouching:
+		_is_running = true
+	else:
+		_is_running = false
+		
+	
+	
 	# ---- Camera bob + footsteps (after move_and_slide so velocity is final) ----
 	var is_moving = velocity.length() > 0.5 and is_on_floor()
  
@@ -165,6 +190,41 @@ func _physics_process(delta):
 		t_step = 0.0
 
 	_handle_footsteps(t_step, is_moving)
+	
+	#gun sway
+	
+	# 1. Determine current speed state to pick the right bob intensity
+	var current_freq: float = BOB_FREQ_IDLE
+	var current_amp: float = BOB_AMP_IDLE
+
+	
+
+	if is_moving:
+		if _is_crouching: # Check your existing crouch variable name
+			current_freq = BOB_FREQ_CROUCH
+			current_amp = BOB_AMP_CROUCH
+		elif _is_running: # Check your existing sprint variable name
+			current_freq = BOB_FREQ_RUN
+			current_amp = BOB_AMP_RUN
+		else:
+			current_freq = BOB_FREQ_WALK
+			current_amp = BOB_AMP_WALK
+
+	# 2. Advance the timer based on the current frequency
+	bob_timer += delta * current_freq
+
+	# 3. Calculate the target position using Sine (Vertical) and Cosine (Horizontal)
+	var target_bob_pos = Vector3.ZERO
+	
+	# The vertical jump (Sine wave)
+	target_bob_pos.y = sin(bob_timer) * current_amp
+	# The horizontal sway (Cosine wave runs at half speed for a natural figure-8 shape)
+	target_bob_pos.x = cos(bob_timer / 2.0) * current_amp
+
+	# 4. Smoothly blend (LERP) the hand container to the new bob position
+	# This prevents the gun from snapping abruptly when you switch from sprinting to crouching
+	item_manager.position.x = lerp(item_manager.position.x, target_bob_pos.x, 10.0 * delta)
+	item_manager.position.y = lerp(item_manager.position.y, target_bob_pos.y, 10.0 * delta)
  
  
 func try_interaction():

@@ -1,7 +1,7 @@
 [gd_scene load_steps=98 format=4 uid="uid://d4bjudmbnjtbv"]
 
 [ext_resource type="Script" uid="uid://ddcgonkumnqp6" path="res://scripts/interactable.gd" id="1_bl4sb"]
-[ext_resource type="AudioStream" uid="uid://tfwkemtfeoq6" path="res://assets/audio/mosin_sounds/mosin_bolt_cycle.wav" id="2_oippa"]
+[ext_resource type="AudioStream" uid="uid://by4rp7i0uqilh" path="res://assets/audio/mosin_sounds/bolt_open.mp3" id="2_oippa"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oippa"]
 size = Vector3(1, 1.20471, 1)
