@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bnramtgqic80e"
-path.s3tc="res://.godot/imported/bear_skin_rug_0.png-0098e969464cd5e51853d50287cfbbcd.s3tc.ctex"
+path.s3tc="res://.godot/imported/bear_skin_rug_0.png-dcd655dddcf1245bf86e1d175efd9e02.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/models/bear_skin_rug_0.png"
-dest_files=["res://.godot/imported/bear_skin_rug_0.png-0098e969464cd5e51853d50287cfbbcd.s3tc.ctex"]
+source_file="res://assets/models/bear_rug/bear_skin_rug_0.png"
+dest_files=["res://.godot/imported/bear_skin_rug_0.png-dcd655dddcf1245bf86e1d175efd9e02.s3tc.ctex"]
 
 [params]
 

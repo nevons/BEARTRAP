@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d02kdqp2dawx7"
-path="res://.godot/imported/bear_skin_rug.glb-1a55e420d672a03a76dd501a01a59a62.scn"
+uid="uid://cbm0ccaig1yov"
+path="res://.godot/imported/low-poly_mosin_nagant.glb-610eed2c53060b9bcdbe697d6d19db2c.scn"
 
 [deps]
 
-source_file="res://assets/models/bear_skin_rug.glb"
-dest_files=["res://.godot/imported/bear_skin_rug.glb-1a55e420d672a03a76dd501a01a59a62.scn"]
+source_file="res://assets/models/mosin/low-poly_mosin_nagant.glb"
+dest_files=["res://.godot/imported/low-poly_mosin_nagant.glb-610eed2c53060b9bcdbe697d6d19db2c.scn"]
 
 [params]
 
