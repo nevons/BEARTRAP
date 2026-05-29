@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3dg4eep7t4cj"]
+
+[ext_resource type="Script" uid="uid://c57eple80n7e7" path="res://scripts/ammo_pickup.gd" id="1_4367f"]
+[ext_resource type="PackedScene" uid="uid://bghty47xyxa47" path="res://assets/models/mosin/clip/clip_7.62x54r.glb" id="1_cpad5"]
+[ext_resource type="AudioStream" uid="uid://e76ygdgjk4jb" path="res://assets/audio/mosin_sounds/ammo.mp3" id="3_scdq0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4367f"]
+size = Vector3(0.727173, 0.443909, 1)
+
+[node name="Area3D" type="Area3D"]
+script = ExtResource("1_4367f")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_cpad5")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0148315, 0.0184021, 0)
+shape = SubResource("BoxShape3D_4367f")
+
+[node name="pickup" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_scdq0")

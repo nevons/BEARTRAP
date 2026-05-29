@@ -20,6 +20,7 @@ surface_wood="wood surface"
 surface_metal=""
 surface_grass=""
 surface_default=""
+mosin_weapon=""
 
 [input]
 

@@ -4,102 +4,105 @@ enum WeaponState { READY, NEED_BOLT, CYCLING, RELOADING, EMPTY }
 var current_state: WeaponState = WeaponState.READY
 
 const MAX_AMMO = 5
-var current_ammo = MAX_AMMO
+var current_ammo = 0 # Starting empty for testing!
+var reserve_ammo = 5 # Starting with a small pool
 
-# Variables for the "Hold to Reload" logic
-var reload_hold_timer: float = 0.0
-const RELOAD_HOLD_THRESHOLD: float = 0.4 # How long the key must be held (in seconds)
-
-# Node References based on your hierarchy
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 func _ready():
-	current_state = WeaponState.READY
-	print("Mosin Ready. Ammo: ", current_ammo, "/", MAX_AMMO)
+	current_state = WeaponState.EMPTY if current_ammo == 0 else WeaponState.READY
+	print("Mosin Ready. Ammo: ", current_ammo, "/", MAX_AMMO, " | Reserve: ", reserve_ammo)
+	
+	add_to_group("mosin_weapon")
 
-func _process(delta):
-	# 1. Listen for the initial "Hold to Reload" action ONLY when the gun is completely empty
-	if current_state == WeaponState.EMPTY:
-		if Input.is_action_pressed("reload"):
-			reload_hold_timer += delta
-			if reload_hold_timer >= RELOAD_HOLD_THRESHOLD:
-				reload_hold_timer = 0.0 # Reset timer
-				action_reload_clip()
-		else:
-			# Reset timer if the player lets go early
-			reload_hold_timer = 0.0 
+# --- NEW AMMO INVENTORY LOGIC ---
+func add_reserve_ammo(amount: int):
+	reserve_ammo += amount
+	print("Reserve ammo is now: ", reserve_ammo)
 
-	# 2. Check if the player lets go MID-RELOAD
-	elif current_state == WeaponState.RELOADING:
-		if not Input.is_action_pressed("reload"):
-			print("Reload canceled! Key released early.")
-			
-			anim_player.stop()
-			if anim_player.has_animation("RESET"):
-				anim_player.play("RESET") 
-			
-			# Revert state back to empty so they have to start over
-			current_state = WeaponState.EMPTY
-
+# --- COMBAT LOGIC ---
 func action_fire():
+	# Allow the player to interrupt a reload by clicking fire!
+	if current_state == WeaponState.RELOADING:
+		print("Reload interrupted!")
+		# We don't instantly fire; we transition to closing the bolt first
+		current_state = WeaponState.READY 
+		return
+
 	if current_state != WeaponState.READY:
 		if current_state == WeaponState.NEED_BOLT:
-			print("*Click* — You need to cycle the bolt! (Press R)")
+			print("*Click* — You need to cycle the bolt!")
 		elif current_state == WeaponState.EMPTY:
-			print("*Click* — Weapon is empty! (Hold R to reload)")
+			print("*Click* — Weapon is empty!")
 		return
 
 	# Fire the weapon
 	current_ammo -= 1
-	print("BANG! Ammo left: ", current_ammo)
+	print("BANG! Ammo left: ", current_ammo, " | Reserve: ", reserve_ammo)
 	
-	# Temporarily set to CYCLING to block inputs while the recoil/fire anim plays
 	current_state = WeaponState.CYCLING
-	
 	if anim_player.has_animation("fire"):
 		anim_player.play("fire")
 		await anim_player.animation_finished
 	
-	# After firing, the player MUST cycle the bolt to eject the spent casing
 	current_state = WeaponState.NEED_BOLT
 
-func action_reload_pressed():
-	# This is triggered by a quick tap of the reload key from the Hand Container
-	if current_state == WeaponState.NEED_BOLT:
-		action_cycle_bolt()
-	elif current_state == WeaponState.EMPTY:
-		print("Hold 'reload' to insert a new clip!")
-
 func action_cycle_bolt():
+	if current_state != WeaponState.NEED_BOLT:
+		return
+		
 	current_state = WeaponState.CYCLING
-	print("Cycling bolt...")
-	
 	if anim_player.has_animation("cycle_bolt"):
 		anim_player.play("cycle_bolt")
 		await anim_player.animation_finished
 		
-	# Determine the next state based on remaining ammo
 	if current_ammo > 0:
 		current_state = WeaponState.READY
-		print("Round chambered. Ready to fire.")
 	else:
 		current_state = WeaponState.EMPTY
-		print("Action is open. Weapon is empty!")
 
-func action_reload_clip():
-	# Backup check to ensure we only reload when empty
-	if current_state != WeaponState.EMPTY:
+# --- NEW LOOPING RELOAD LOGIC ---
+func action_reload_pressed():
+	if current_state == WeaponState.NEED_BOLT:
+		action_cycle_bolt()
+	elif current_state == WeaponState.READY or current_state == WeaponState.EMPTY:
+		start_looping_reload()
+
+func start_looping_reload():
+	if current_ammo == MAX_AMMO:
+		print("Already fully loaded.")
 		return
-		
+	if reserve_ammo <= 0:
+		print("No reserve ammo left!")
+		return
+
 	current_state = WeaponState.RELOADING
-	print("Inserting new stripper clip... Keep holding!")
-	
-	if anim_player.has_animation("reload"):
-		anim_player.play("reload")
+	print("Starting reload...")
+
+	# 1. Open the bolt
+	if anim_player.has_animation("reload_start"):
+		anim_player.play("reload_start")
+		await anim_player.animation_finished
+
+	# 2. Loop the bullet insertion
+	while current_ammo < MAX_AMMO and reserve_ammo > 0 and current_state == WeaponState.RELOADING:
+		if anim_player.has_animation("reload_insert"):
+			anim_player.play("reload_insert")
+			await anim_player.animation_finished
+			
+			# Check ONE MORE TIME if the player interrupted the animation before giving the ammo
+			if current_state == WeaponState.RELOADING:
+				current_ammo += 1
+				reserve_ammo -= 1
+				print("Loaded 1 round. Chamber: ", current_ammo, " | Reserve: ", reserve_ammo)
+
+	# 3. Close the bolt (This plays whether the loop finished naturally OR was interrupted)
+	if anim_player.has_animation("reload_end"):
+		anim_player.play("reload_end")
 		await anim_player.animation_finished
 		
-	# CRITICAL CHECK: Replenish ammo ONLY if the animation wasn't canceled
-	if current_state == WeaponState.RELOADING:
-		current_ammo = MAX_AMMO
+	# Finalize state
+	if current_ammo > 0:
 		current_state = WeaponState.READY
-		print("Reload complete. Ammo: ", current_ammo, "/", MAX_AMMO)
+	else:
+		current_state = WeaponState.EMPTY

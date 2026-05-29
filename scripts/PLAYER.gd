@@ -89,6 +89,8 @@ func _unhandled_input(event):
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
+	interact_raycast.collide_with_areas = true
+	
 	#item switch
 	if event.is_action_pressed("interact"):
 		try_interaction()

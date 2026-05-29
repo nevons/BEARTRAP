@@ -1,4 +1,4 @@
-[gd_scene load_steps=158 format=4 uid="uid://dp3up1qky8mfq"]
+[gd_scene load_steps=162 format=4 uid="uid://dp3up1qky8mfq"]
 
 [ext_resource type="Script" uid="uid://bx5vdnhgg6epu" path="res://scripts/PLAYER.gd" id="1_r53wf"]
 [ext_resource type="AudioStream" uid="uid://csktmykqk26gj" path="res://assets/audio/footstep_wood/wood1.wav" id="2_hruy7"]
@@ -23,6 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://by4rp7i0uqilh" path="res://assets/audio/mosin_sounds/bolt_open.mp3" id="20_n38qo"]
 [ext_resource type="AudioStream" uid="uid://vopdsvrhp2r5" path="res://assets/audio/mosin_sounds/bolt_close.mp3" id="21_unvn8"]
 [ext_resource type="AudioStream" uid="uid://byr2cdf4ttlxp" path="res://assets/audio/mosin_sounds/bullet_loading.mp3" id="22_g5e30"]
+[ext_resource type="AudioStream" uid="uid://bfi7vhqd1lcxq" path="res://assets/audio/mosin_sounds/chambering.mp3" id="23_5jmb6"]
 [ext_resource type="AudioStream" uid="uid://ysxm5ba0onv3" path="res://assets/audio/mosin_sounds/rifle_shot.mp3" id="23_g5e30"]
 [ext_resource type="Texture2D" uid="uid://dn8e6qk7eejpd" path="res://assets/models/mosin/clip/clip_7_3.jpg" id="23_imxgk"]
 [ext_resource type="Texture2D" uid="uid://mhtw47x6qgik" path="res://assets/models/mosin/clip/clip_7_4.png" id="24_5jmb6"]
@@ -1676,6 +1677,54 @@ tracks/15/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("clip/Bullet:position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("clip/Bullet:rotation")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.55271e-15, 2.11758e-22, 0)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("clip/Bullet:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("low_poly_mosin/chambering:playing")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_0hybe"]
 resource_name = "cycle_bolt"
@@ -1964,12 +2013,243 @@ tracks/14/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_6dbgp"]
+resource_name = "reload_start"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("low_poly_mosin:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.439, -0.218, -0.725), Vector3(0.159, 0.042, -0.555)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("low_poly_mosin:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0), Vector3(0, 1.45735, 0.663225)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("low_poly_mosin/BoltPivot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.202395, 0.0562705, 0.00519956), Vector3(-0.202395, 0.0562705, 0.00519956), Vector3(-0.342, 0.056, 0.005)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("low_poly_mosin/BoltPivot:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-1.5708, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("low_poly_mosin/bolt_open:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.03),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_w4ug3"]
+resource_name = "reload_insert"
+length = 1.35
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("low_poly_mosin:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.159, 0.042, -0.555)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("low_poly_mosin:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.45735, 0.663225)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("low_poly_mosin/BoltPivot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.342, 0.056, 0.005)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("low_poly_mosin/BoltPivot:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("clip/Bullet:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 1.3, 1.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-4.96, 3.603, 2.247), Vector3(-4.96, 3.603, 1.917), Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("clip/Bullet:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1, 1.35),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(3.55271e-15, 2.11758e-22, 0), Vector3(0, 0.558505, 0), Vector3(3.55271e-15, 2.11758e-22, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("clip/Bullet:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("low_poly_mosin/chambering:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1.06),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_yobr8"]
+resource_name = "reload_end"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("low_poly_mosin:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.159, 0.042, -0.555), Vector3(0.159, 0.042, -0.555), Vector3(0.439, -0.218, -0.725)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("low_poly_mosin:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.45735, 0.663225), Vector3(0, 1.45735, 0.663225), Vector3(0, 1.5708, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("low_poly_mosin/BoltPivot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.342, 0.056, 0.005), Vector3(-0.202, 0.056, 0.005)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("low_poly_mosin/BoltPivot:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0), Vector3(-1.5708, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("low_poly_mosin/bolt_close:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gtncy"]
 _data = {
 &"RESET": SubResource("Animation_n38qo"),
 &"cycle_bolt": SubResource("Animation_0hybe"),
 &"fire": SubResource("Animation_ehigy"),
-&"reload": SubResource("Animation_pkihq")
+&"reload": SubResource("Animation_pkihq"),
+&"reload_end": SubResource("Animation_yobr8"),
+&"reload_insert": SubResource("Animation_w4ug3"),
+&"reload_start": SubResource("Animation_6dbgp")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6xxix"]
@@ -2396,14 +2676,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.287777, 0)
 current = true
 
 [node name="InteractionRay" type="RayCast3D" parent="CharacterBody3D/Head/Camera3D"]
-target_position = Vector3(0, 0, -1.5)
+target_position = Vector3(0, 0, -2)
 collision_mask = 2
 collide_with_areas = true
 
 [node name="HandContainer" type="Node3D" parent="CharacterBody3D/Head/Camera3D"]
 script = ExtResource("18_ua83o")
 
-[node name="MosinMesh" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer"]
+[node name="MosinMesh" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer" groups=["mosin_weapon"]]
 script = ExtResource("19_n38qo")
 
 [node name="low_poly_mosin" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh"]
@@ -2732,6 +3012,9 @@ stream = ExtResource("21_unvn8")
 [node name="bullet_loading" type="AudioStreamPlayer3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
 stream = ExtResource("22_g5e30")
 
+[node name="chambering" type="AudioStreamPlayer3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
+stream = ExtResource("23_5jmb6")
+
 [node name="rifle_shot" type="AudioStreamPlayer3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.603541, 0, 2.17557e-06)
 stream = ExtResource("23_g5e30")
@@ -2743,7 +3026,7 @@ libraries = {
 }
 
 [node name="clip" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh"]
-transform = Transform3D(-4.37114e-09, 0.1, 0, -0.1, -4.37114e-09, 0, 0, 0, 0.1, -0.204745, -0.518175, -0.564239)
+transform = Transform3D(-3.61999e-07, 0.1, 0, -0.1, -3.61999e-07, 0, 0, 0, 0.1, -0.204745, -0.518175, -0.564239)
 visible = false
 
 [node name="Sketchfab_model" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip"]
@@ -2801,11 +3084,17 @@ transform = Transform3D(1, 0, 0, 0, 1, -3.55271e-15, -2.11758e-22, 3.55271e-15, 
 mesh = SubResource("ArrayMesh_qjfpv")
 skeleton = NodePath("")
 
+[node name="Bullet" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip"]
+transform = Transform3D(1, 7.52315e-37, 2.11758e-22, 0, 1, -3.55271e-15, -2.11758e-22, 3.55271e-15, 1, 0, 0, 0)
+
+[node name="defaultMaterial7" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Bullet"]
+mesh = SubResource("ArrayMesh_4stlk")
+skeleton = NodePath("")
+
 [node name="FlashlightMesh" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/FlashlightMesh"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.459314, -0.162117, -0.521569)
-visible = false
 mesh = SubResource("CylinderMesh_ua83o")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/FlashlightMesh"]
@@ -2858,6 +3147,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.847525, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.292604, 0, -0.422618)
 
 [node name="FlashlightLight" type="SpotLight3D" parent="CharacterBody3D/BeltPosition"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 visible = false
 light_energy = 5.0
 
