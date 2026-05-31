@@ -66,7 +66,33 @@ func action_reload_pressed():
 	if current_state == WeaponState.NEED_BOLT:
 		action_cycle_bolt()
 	elif current_state == WeaponState.READY or current_state == WeaponState.EMPTY:
-		start_looping_reload()
+		
+		# --- THE TACTICAL ROUTER ---
+		# If the gun is totally empty AND we have enough for a full clip
+		if current_ammo == 0 and reserve_ammo >= MAX_AMMO:
+			start_clip_reload()
+		else:
+			# Otherwise, we use the single-bullet loop to top off
+			start_looping_reload()
+
+
+# --- NEW: THE VETERAN CLIP RELOAD ---
+func start_clip_reload():
+	current_state = WeaponState.RELOADING
+	print("Veteran perk: Fast-loading a full 5-round stripper clip!")
+	
+	# Play your original full animation
+	if anim_player.has_animation("reload"):
+		anim_player.play("reload")
+		await anim_player.animation_finished
+		
+	# Check if they interrupted the animation by firing
+	if current_state == WeaponState.RELOADING:
+		reserve_ammo -= MAX_AMMO
+		current_ammo = MAX_AMMO
+		current_state = WeaponState.READY
+		print("Clip loaded! Chamber: ", current_ammo, " | Reserve: ", reserve_ammo)
+
 
 func start_looping_reload():
 	if current_ammo == MAX_AMMO:
