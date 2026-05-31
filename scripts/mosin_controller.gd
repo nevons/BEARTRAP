@@ -45,6 +45,11 @@ func action_fire():
 	current_ammo -= 1
 	print("BANG! Ammo left: ", current_ammo, " | Reserve: ", reserve_ammo)
 	
+	#recoil and kick
+	var player = get_tree().get_first_node_in_group("player")
+	if player and player.has_method("fire_recoil"):
+		player.fire_recoil()
+	
 	current_state = WeaponState.CYCLING
 	if anim_player.has_animation("fire"):
 		anim_player.play("fire")

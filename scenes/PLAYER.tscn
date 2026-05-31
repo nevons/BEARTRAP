@@ -2706,7 +2706,7 @@ _data = {
 
 [node name="Node3D" type="Node3D"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." groups=["player"]]
 collision_layer = 2
 floor_stop_on_slope = false
 script = ExtResource("1_r53wf")

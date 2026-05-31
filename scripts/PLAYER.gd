@@ -11,6 +11,11 @@ var speed
 var _is_crouching : bool = false
 var _is_running : bool = false
 
+# --- Recoil System ---
+var target_recoil: Vector3 = Vector3.ZERO
+var current_recoil: Vector3 = Vector3.ZERO
+const RECOIL_SNAP: float = 60.0    # How violently the camera kicks
+const RECOIL_RETURN: float = 3.0   # How smoothly it centers back
 
 var sensitivity = 0.05
 
@@ -248,6 +253,14 @@ func _physics_process(delta):
 	# This prevents the gun from snapping abruptly when you switch from sprinting to crouching
 	item_manager.position.x = lerp(item_manager.position.x, target_bob_pos.x, 10.0 * delta)
 	item_manager.position.y = lerp(item_manager.position.y, target_bob_pos.y, 10.0 * delta)
+	
+	# kick and recoil
+	# 1. Constantly ease the target back to zero
+	target_recoil = target_recoil.lerp(Vector3.ZERO, delta * RECOIL_RETURN)
+	# 2. Rapidly snap the current recoil to the target
+	current_recoil = current_recoil.lerp(target_recoil, delta * RECOIL_SNAP)
+	# 3. Apply it to the camera
+	cam.rotation = current_recoil
  
  
 func try_interaction():
@@ -340,3 +353,12 @@ func _toggle_crouch():
 func _on_animation_player_animation_started(anim_name):
 	if anim_name == "crouch":
 		_is_crouching=!_is_crouching
+		
+func fire_recoil():
+	# Mosin is a heavy rifle, give it a hefty kick!
+	# Positive X pitches the camera up. Random Y and Z add the "shake".
+	var kick_up = randf_range(7.0,10.0)     # Degrees to violently kick up
+	var shake_yaw = randf_range(-1.5, 3.5)  # Left/right chaotic shake
+	var shake_roll = randf_range(-1.0, 4.0) # Screen tilt
+	
+	target_recoil += Vector3(deg_to_rad(kick_up), deg_to_rad(shake_yaw), deg_to_rad(shake_roll))

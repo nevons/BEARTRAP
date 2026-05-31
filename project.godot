@@ -21,6 +21,7 @@ surface_metal=""
 surface_grass=""
 surface_default=""
 mosin_weapon=""
+player=""
 
 [input]
 
