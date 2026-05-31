@@ -11,7 +11,8 @@ var speed
 var _is_crouching : bool = false
 var _is_running : bool = false
 
-const sensitivity = 0.05
+
+var sensitivity = 0.05
 
 #fov
 const fov_base = 90
@@ -139,9 +140,22 @@ func _physics_process(delta):
 		velocity.z = lerp(velocity.z, direction.z*speed, delta*3.0)
 		
 	#fov
-	var vel_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED*2 )
-	var target_fov = fov_base + fov_change*vel_clamped
-	cam.fov = lerp(cam.fov, target_fov, delta*8.0)
+	# --- FOV & ZOOM LOGIC ---
+	var target_fov = fov_base
+	var fov_speed = 8.0 # Default transition speed
+	
+	if Input.is_action_pressed("zoom"):
+		target_fov = 55.0 
+		fov_speed = 12.0 
+		sensitivity = 0.02 
+	else:
+		# Only apply the movement FOV stretching if we are NOT aiming
+		sensitivity = 0.05
+		var vel_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED*2 )
+		target_fov = fov_base + fov_change * vel_clamped
+
+	# Smoothly transition the camera to whatever the target FOV is
+	cam.fov = lerp(cam.fov, target_fov, delta * fov_speed)
 
 	move_and_slide()
 	
