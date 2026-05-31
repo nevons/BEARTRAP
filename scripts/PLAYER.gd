@@ -112,18 +112,23 @@ func _physics_process(delta):
 	var moving_forward: bool = input_dir.y < -0.5 and abs(input_dir.x) < 0.5
 	
 	# speed and movement logic
-	# Added check: cannot sprint if '_is_crouching' is true
-	if Input.is_action_pressed("sprint") and moving_forward and not _is_crouching:
-		speed = SPRINT_SPEED
-	elif Input.is_action_just_pressed("crouch"):
+	# Get a quick reference to whether we are aiming right now
+	var is_zooming: bool = Input.is_action_pressed("zoom")
+	
+	# speed and movement logic
+	if Input.is_action_just_pressed("crouch"):
 		_toggle_crouch()
 		# Speed assignment is safely decoupled here to let _toggle_crouch handle state transitions
+		
+	# Added check: cannot sprint if '_is_crouching' OR 'is_zooming' is true
+	if Input.is_action_pressed("sprint") and moving_forward and not _is_crouching and not is_zooming:
+		speed = SPRINT_SPEED
 	else:
 		# Fallback movement speeds based on current stance state
-		if _is_crouching:
+		if _is_crouching or is_zooming:
 			speed = CROUCHED_SPEED
 		else:
-			speed = WALK_SPEED 
+			speed = WALK_SPEED
 	
 	var direction = (self.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
@@ -145,11 +150,13 @@ func _physics_process(delta):
 	var fov_speed = 8.0 # Default transition speed
 	
 	if Input.is_action_pressed("zoom"):
+		speed = CROUCHED_SPEED
 		target_fov = 55.0 
 		fov_speed = 12.0 
 		sensitivity = 0.02 
 	else:
 		# Only apply the movement FOV stretching if we are NOT aiming
+		speed = WALK_SPEED
 		sensitivity = 0.05
 		var vel_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED*2 )
 		target_fov = fov_base + fov_change * vel_clamped
@@ -163,8 +170,8 @@ func _physics_process(delta):
 	var wants_to_sprint = Input.is_action_pressed("sprint")
 	var is_moving_input = input_dir.length() > 0.1
 	
-	# The player is running ONLY if they want to sprint, are moving, and aren't crouching
-	if wants_to_sprint and is_moving_input and not _is_crouching:
+	# The player is running ONLY if they want to sprint, are moving, aren't crouching, AND aren't zooming
+	if wants_to_sprint and is_moving_input and not _is_crouching and not is_zooming:
 		_is_running = true
 	else:
 		_is_running = false
