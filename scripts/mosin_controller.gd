@@ -34,6 +34,11 @@ func action_fire():
 			print("*Click* — You need to cycle the bolt!")
 		elif current_state == WeaponState.EMPTY:
 			print("*Click* — Weapon is empty!")
+			
+			# --- ADD YOUR NEW ANIMATION HERE ---
+			if anim_player.has_animation("empty"): 
+				anim_player.play("empty")
+				
 		return
 
 	# Fire the weapon

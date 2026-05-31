@@ -1,4 +1,4 @@
-[gd_scene load_steps=162 format=4 uid="uid://dp3up1qky8mfq"]
+[gd_scene load_steps=164 format=4 uid="uid://dp3up1qky8mfq"]
 
 [ext_resource type="Script" uid="uid://bx5vdnhgg6epu" path="res://scripts/PLAYER.gd" id="1_r53wf"]
 [ext_resource type="AudioStream" uid="uid://csktmykqk26gj" path="res://assets/audio/footstep_wood/wood1.wav" id="2_hruy7"]
@@ -27,6 +27,7 @@
 [ext_resource type="AudioStream" uid="uid://ysxm5ba0onv3" path="res://assets/audio/mosin_sounds/rifle_shot.mp3" id="23_g5e30"]
 [ext_resource type="Texture2D" uid="uid://dn8e6qk7eejpd" path="res://assets/models/mosin/clip/clip_7_3.jpg" id="23_imxgk"]
 [ext_resource type="Texture2D" uid="uid://mhtw47x6qgik" path="res://assets/models/mosin/clip/clip_7_4.png" id="24_5jmb6"]
+[ext_resource type="AudioStream" uid="uid://dsyiyaebl25dl" path="res://assets/audio/mosin_sounds/gun_click.mp3" id="25_5jmb6"]
 [ext_resource type="Texture2D" uid="uid://bmuacmjylnn6j" path="res://assets/models/mosin/clip/clip_7_5.png" id="25_6dbgp"]
 [ext_resource type="Texture2D" uid="uid://cnn604dk4goil" path="res://assets/models/mosin/clip/clip_7_0.png" id="26_w4ug3"]
 [ext_resource type="Texture2D" uid="uid://cciscvi5av2nk" path="res://assets/models/mosin/clip/clip_7_1.png" id="27_yobr8"]
@@ -1725,6 +1726,18 @@ tracks/19/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("low_poly_mosin/gun_click:playing")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_0hybe"]
 resource_name = "cycle_bolt"
@@ -2253,10 +2266,39 @@ tracks/4/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_qftmw"]
+resource_name = "empty"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("low_poly_mosin:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.439, -0.218, -0.725), Vector3(0.439, -0.218, -0.7), Vector3(0.439, -0.218, -0.725)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("low_poly_mosin/gun_click:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gtncy"]
 _data = {
 &"RESET": SubResource("Animation_n38qo"),
 &"cycle_bolt": SubResource("Animation_0hybe"),
+&"empty": SubResource("Animation_qftmw"),
 &"fire": SubResource("Animation_ehigy"),
 &"reload": SubResource("Animation_pkihq"),
 &"reload_end": SubResource("Animation_yobr8"),
@@ -3030,6 +3072,11 @@ stream = ExtResource("23_5jmb6")
 [node name="rifle_shot" type="AudioStreamPlayer3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.603541, 0, 2.17557e-06)
 stream = ExtResource("23_g5e30")
+volume_db = 6.0
+
+[node name="gun_click" type="AudioStreamPlayer3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.603541, 0, 2.17557e-06)
+stream = ExtResource("25_5jmb6")
 volume_db = 6.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh"]
