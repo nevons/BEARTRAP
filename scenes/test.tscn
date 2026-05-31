@@ -274,14 +274,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.68312, 1.01499, -33.0347)
 radius = 0.211426
 height = 0.714844
 
-[node name="Area3D" parent="." instance=ExtResource("9_uacia")]
+[node name="ammo" parent="." instance=ExtResource("9_uacia")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 4.81125, 1.57033, -25.0611)
 
-[node name="Area3D2" parent="." instance=ExtResource("9_uacia")]
+[node name="ammo1" parent="." instance=ExtResource("9_uacia")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -3.93387, 0.573049, -25.9369)
 
-[node name="Area3D3" parent="." instance=ExtResource("9_uacia")]
+[node name="ammo2" parent="." instance=ExtResource("9_uacia")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -4.23529, 0.573049, -25.9369)
 
-[node name="Area3D4" parent="." instance=ExtResource("9_uacia")]
+[node name="ammo3" parent="." instance=ExtResource("9_uacia")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -4.51532, 0.573049, -25.9369)

@@ -232,10 +232,25 @@ func _physics_process(delta):
 func try_interaction():
 	if interact_raycast.is_colliding():
 		var collider = interact_raycast.get_collider()
-		if collider is Interactable:
-			# Connect the item picked up to your inventory/item manager
-			item_manager.unlock_and_equip_item(collider.item_enum_id)
+		
+		# 1. DEBUG: Tell us exactly what the raycast just hit
+		print("RayCast hit: ", collider.name) 
+		
+		# 2. DUCK TYPING: Bypass 'is Interactable' and just check if the function exists
+		if collider.has_method("interact"):
+			print("Interactable object confirmed. Running code...")
+			
+			# 3. Only attempt to equip the item to the hand if it is an actual equippable tool
+			# (Ammo boxes will inherit an ID of 0, so this prevents the hand container from glitching)
+			if "item_enum_id" in collider and collider.item_enum_id > 0:
+				item_manager.unlock_and_equip_item(collider.item_enum_id)
+			
+			# Run the interact logic (whether it's ammo or a weapon)
 			collider.interact()
+		else:
+			print("WARNING: This object does NOT have an interact() script attached.")
+	else:
+		print("RayCast didn't hit anything at all.")
 
 
 # Smooth figure-8 style bob: vertical on every step, lateral on every two steps

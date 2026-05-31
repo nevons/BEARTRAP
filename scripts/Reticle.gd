@@ -13,4 +13,5 @@ func _process(delta):
 	pass
 
 func _draw():
-	draw_circle(Vector2(0,0),dot_radius,dot_color)
+	# size / 2.0 perfectly calculates the mathematical center of the UI node
+	draw_circle(size / 2.0, dot_radius, dot_color)
