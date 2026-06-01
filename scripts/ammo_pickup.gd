@@ -5,7 +5,7 @@ var ammo_yield: int = 1
 
 func _ready():
 	# Generate random bullets when the box spawns
-	ammo_yield = randi_range(1, 5)
+	ammo_yield = randi_range(1, 3)
 	
 	# Dynamically override the item_name from the parent class
 	# Your prompt_text() will now automatically say "Press [E] to pick up 3 Mosin Rounds"
@@ -20,11 +20,10 @@ func interact():
 	if player:
 		if player.has_method("update_ammo_ui"):
 			player.update_ammo_ui(mosin.current_ammo, mosin.reserve_ammo)
-		elif player.has_method("sync_ammo_to_ui"):
-			player.sync_ammo_to_ui()
 	
 	if mosin:
 		mosin.add_reserve_ammo(ammo_yield)
+		player.update_ammo_ui(mosin.current_ammo, mosin.reserve_ammo)
 	else:
 		print("Must get my rifle first...")
 		

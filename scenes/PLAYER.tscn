@@ -1,4 +1,4 @@
-[gd_scene load_steps=167 format=4 uid="uid://dp3up1qky8mfq"]
+[gd_scene load_steps=166 format=4 uid="uid://dp3up1qky8mfq"]
 
 [ext_resource type="Script" uid="uid://bx5vdnhgg6epu" path="res://scripts/PLAYER.gd" id="1_r53wf"]
 [ext_resource type="AudioStream" uid="uid://csktmykqk26gj" path="res://assets/audio/footstep_wood/wood1.wav" id="2_hruy7"]
@@ -35,6 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://cgjrsa303ldcx" path="res://assets/models/mosin/clip/clip_7_9.jpg" id="29_8irta"]
 [ext_resource type="Texture2D" uid="uid://bupx22g5g0qp7" path="res://assets/models/mosin/clip/clip_7_10.png" id="30_12bh3"]
 [ext_resource type="Texture2D" uid="uid://c2choebmousba" path="res://assets/models/mosin/clip/clip_7_11.jpg" id="31_ptbnk"]
+[ext_resource type="PackedScene" uid="uid://58aoyf4eqn2n" path="res://assets/models/flashlight.glb" id="35_qftmw"]
 [ext_resource type="FontFile" uid="uid://di3t17cif078q" path="res://assets/fonts/Kyiv Machine.ttf" id="36_6dbgp"]
 [ext_resource type="Texture2D" uid="uid://bj164shd037vk" path="res://assets/textures/reloadring/whitering.webp" id="36_yobr8"]
 [ext_resource type="Texture2D" uid="uid://bdt34o45it10a" path="res://assets/textures/battery/battery inner.png" id="38_qftmw"]
@@ -2588,15 +2589,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_i0fu3")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1uxv8"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ua83o"]
-material = SubResource("StandardMaterial3D_1uxv8")
-top_radius = 0.1
-bottom_radius = 0.1
-height = 0.2
-
 [sub_resource type="Animation" id="Animation_kfllp"]
 length = 0.001
 tracks/0/type = "value"
@@ -3156,12 +3148,11 @@ skeleton = NodePath("")
 
 [node name="FlashlightMesh" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/FlashlightMesh"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.459314, -0.162117, -0.521569)
-mesh = SubResource("CylinderMesh_ua83o")
+[node name="flashlight" parent="CharacterBody3D/Head/Camera3D/HandContainer/FlashlightMesh" instance=ExtResource("35_qftmw")]
+transform = Transform3D(-3.0598e-09, 0, -0.07, 0, 0.07, 0, 0.07, 0, -3.0598e-09, 0.44968, -0.192392, -0.453424)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/FlashlightMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.473771, -0.16994, -0.630426)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.473771, -0.123823, -0.531989)
 visible = false
 light_energy = 5.0
 

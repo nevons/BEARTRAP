@@ -118,7 +118,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_uacia")
 transform = Transform3D(-0.675783, -0.735477, -0.0488892, -2.2196e-08, 0.0663265, -0.997798, 0.7371, -0.674295, -0.0448223, -4.47527, 1.43482, -27.3746)
 
 [node name="FlashlightPickup2" parent="." instance=ExtResource("6_lpvoh")]
-transform = Transform3D(3.09086e-08, -0.707107, 0.707106, -1, -4.37114e-08, 0, 3.09087e-08, -0.707106, -0.707107, 4.98774, 1.64198, -25.4949)
+transform = Transform3D(4.63629e-09, -0.106066, 0.106066, -0.15, -6.55671e-09, -1.57208e-14, 4.6363e-09, -0.106066, -0.106066, 4.98774, 1.64198, -25.4949)
 
 [node name="Cabin" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.47663, -29.2151)

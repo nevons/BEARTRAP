@@ -75,7 +75,8 @@ var bob_timer: float = 0.0
 
 #UI
 @onready var ammo_label: Label = $UI/AmmoContainer/Label
-
+@onready var reload_ring: TextureProgressBar = $UI/Reticle/ReloadRing
+var reload_tween: Tween
 
 
 
@@ -85,7 +86,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 #camera rotation
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
+	reload_ring.visible = false
 	#headbonker exception is us!
 	headbbonker.add_exception($".")
 	
@@ -372,3 +373,20 @@ func fire_recoil():
 func update_ammo_ui(current: int, reserve: int):
 	if ammo_label:
 		ammo_label.text = str(current) + " / " + str(reserve)
+
+func start_reload_ui(anim_duration: float):
+	reload_ring.value = 0
+	reload_ring.visible = true
+	
+	# Kill any previous tween so they don't fight
+	if reload_tween:
+		reload_tween.kill()
+		
+	reload_tween = create_tween()
+	# Smoothly animate 'value' to 100 over the exact length of the animation
+	reload_tween.tween_property(reload_ring, "value", 100.0, anim_duration)
+
+func stop_reload_ui():
+	if reload_tween:
+		reload_tween.kill()
+	reload_ring.visible = false

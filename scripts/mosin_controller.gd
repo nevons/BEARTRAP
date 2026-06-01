@@ -5,7 +5,7 @@ var current_state: WeaponState = WeaponState.READY
 
 const MAX_AMMO = 5
 var current_ammo = 0 # Starting empty for testing!
-var reserve_ammo = 5 # Starting with a small pool
+var reserve_ammo = 0 # Starting with a small pool
 
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
@@ -87,27 +87,36 @@ func action_reload_pressed():
 			# Otherwise, we use the single-bullet loop to top off
 			start_looping_reload()
 
-
-# --- NEW: THE VETERAN CLIP RELOAD ---
 func start_clip_reload():
 	current_state = WeaponState.RELOADING
-	print("Veteran perk: Fast-loading a full 5-round stripper clip!")
+	var player = get_tree().get_first_node_in_group("player")
 	
-	# Play your original full animation
 	if anim_player.has_animation("reload"):
+		# 1. Ask the animation player EXACTLY how long the animation takes
+		var anim_length = anim_player.get_animation("reload").length
+		
+		# 2. Tell the UI to start filling for that duration
+		if player and player.has_method("start_reload_ui"):
+			player.start_reload_ui(anim_length)
+			
 		anim_player.play("reload")
 		await anim_player.animation_finished
+		
+	# 3. Hide the ring when the animation finishes (or if it gets interrupted)
+	if player and player.has_method("stop_reload_ui"):
+		player.stop_reload_ui()
 		
 	# Check if they interrupted the animation by firing
 	if current_state == WeaponState.RELOADING:
 		reserve_ammo -= MAX_AMMO
 		current_ammo = MAX_AMMO
-		sync_ammo_to_ui()
 		current_state = WeaponState.READY
+		sync_ammo_to_ui()
 		print("Clip loaded! Chamber: ", current_ammo, " | Reserve: ", reserve_ammo)
 
 
 func start_looping_reload():
+	var player = get_tree().get_first_node_in_group("player")
 	if current_ammo == MAX_AMMO:
 		print("Already fully loaded.")
 		return
@@ -117,8 +126,10 @@ func start_looping_reload():
 
 	current_state = WeaponState.RELOADING
 	print("Starting reload...")
-
+	var anim_length = anim_player.get_animation("reload_insert").length * (MAX_AMMO- current_ammo)
+	player.start_reload_ui(anim_length)
 	# 1. Open the bolt
+	
 	if anim_player.has_animation("reload_start"):
 		anim_player.play("reload_start")
 		await anim_player.animation_finished
@@ -140,6 +151,10 @@ func start_looping_reload():
 	if anim_player.has_animation("reload_end"):
 		anim_player.play("reload_end")
 		await anim_player.animation_finished
+	
+	
+	if player and player.has_method("stop_reload_ui"):
+		player.stop_reload_ui()
 		
 	# Finalize state
 	if current_ammo > 0:
