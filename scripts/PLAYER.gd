@@ -73,6 +73,12 @@ var bob_timer: float = 0.0
 @onready var item_manager = $Head/Camera3D/HandContainer
 
 
+#UI
+@onready var ammo_label: Label = $UI/AmmoContainer/Label
+
+
+
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -362,3 +368,7 @@ func fire_recoil():
 	var shake_roll = randf_range(-1.0, 4.0) # Screen tilt
 	
 	target_recoil += Vector3(deg_to_rad(kick_up), deg_to_rad(shake_yaw), deg_to_rad(shake_roll))
+
+func update_ammo_ui(current: int, reserve: int):
+	if ammo_label:
+		ammo_label.text = str(current) + " / " + str(reserve)

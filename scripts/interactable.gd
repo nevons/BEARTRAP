@@ -13,11 +13,16 @@ func prompt_text() -> String:
 
 func interact():
 	emit_signal("interacted", item_enum_id)
+	var player = get_tree().get_first_node_in_group("player")
 	
 	if pickup_sound and pickup_sound.stream:
 		for child in get_children():
 			if child is MeshInstance3D:
 				child.visible = false
+		
+		if item_enum_id == 1:
+			var mosin = get_tree().get_first_node_in_group("mosin_weapon")
+			player.update_ammo_ui(mosin.current_ammo, mosin.reserve_ammo)
 		
 		# Disable collisions so the player can't interact with it twice
 		monitorable = false

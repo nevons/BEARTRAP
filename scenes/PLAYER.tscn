@@ -1,4 +1,4 @@
-[gd_scene load_steps=164 format=4 uid="uid://dp3up1qky8mfq"]
+[gd_scene load_steps=167 format=4 uid="uid://dp3up1qky8mfq"]
 
 [ext_resource type="Script" uid="uid://bx5vdnhgg6epu" path="res://scripts/PLAYER.gd" id="1_r53wf"]
 [ext_resource type="AudioStream" uid="uid://csktmykqk26gj" path="res://assets/audio/footstep_wood/wood1.wav" id="2_hruy7"]
@@ -35,6 +35,9 @@
 [ext_resource type="Texture2D" uid="uid://cgjrsa303ldcx" path="res://assets/models/mosin/clip/clip_7_9.jpg" id="29_8irta"]
 [ext_resource type="Texture2D" uid="uid://bupx22g5g0qp7" path="res://assets/models/mosin/clip/clip_7_10.png" id="30_12bh3"]
 [ext_resource type="Texture2D" uid="uid://c2choebmousba" path="res://assets/models/mosin/clip/clip_7_11.jpg" id="31_ptbnk"]
+[ext_resource type="FontFile" uid="uid://di3t17cif078q" path="res://assets/fonts/Kyiv Machine.ttf" id="36_6dbgp"]
+[ext_resource type="Texture2D" uid="uid://bj164shd037vk" path="res://assets/textures/reloadring/whitering.webp" id="36_yobr8"]
+[ext_resource type="Texture2D" uid="uid://bdt34o45it10a" path="res://assets/textures/battery/battery inner.png" id="38_qftmw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a1u3h"]
 
@@ -1803,6 +1806,34 @@ tracks/4/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_qftmw"]
+resource_name = "empty"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("low_poly_mosin:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.439, -0.218, -0.725), Vector3(0.439, -0.218, -0.7), Vector3(0.439, -0.218, -0.725)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("low_poly_mosin/gun_click:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_ehigy"]
 resource_name = "fire"
 tracks/0/type = "value"
@@ -2261,34 +2292,6 @@ tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(1.03),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_qftmw"]
-resource_name = "empty"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("low_poly_mosin:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0.439, -0.218, -0.725), Vector3(0.439, -0.218, -0.7), Vector3(0.439, -0.218, -0.725)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("low_poly_mosin/gun_click:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -3180,6 +3183,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 1
 
 [node name="Reticle" type="CenterContainer" parent="CharacterBody3D/UI"]
@@ -3189,10 +3194,65 @@ anchor_left = 0.482639
 anchor_top = 0.469136
 anchor_right = 0.517361
 anchor_bottom = 0.530864
+offset_left = -153.0
+offset_top = -155.0
+offset_right = 153.0
+offset_bottom = 155.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_wwg6x")
-metadata/_edit_use_anchors_ = true
+
+[node name="ReloadRing" type="TextureProgressBar" parent="CharacterBody3D/UI/Reticle"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+value = 28.0
+fill_mode = 4
+radial_center_offset = Vector2(3, -4)
+nine_patch_stretch = true
+texture_under = ExtResource("36_yobr8")
+texture_progress = ExtResource("36_yobr8")
+tint_under = Color(0, 0, 0, 1)
+
+[node name="AmmoContainer" type="MarginContainer" parent="CharacterBody3D/UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="Label" type="Label" parent="CharacterBody3D/UI/AmmoContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("36_6dbgp")
+theme_override_font_sizes/font_size = 50
+
+[node name="BatteryContainer" type="MarginContainer" parent="CharacterBody3D/UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = -255.0
+offset_right = 111.0
+offset_bottom = 2.0
+grow_vertical = 0
+scale = Vector2(0.269478, 0.924491)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CharacterBody3D/UI/BatteryContainer"]
+layout_mode = 2
+value = 51.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_under = ExtResource("38_qftmw")
+texture_progress = ExtResource("38_qftmw")
+tint_under = Color(0, 0, 0, 1)
+tint_over = Color(0.308882, 0.882449, 2.31028e-06, 1)
 
 [node name="FootstepRay" type="RayCast3D" parent="CharacterBody3D"]
 target_position = Vector3(0, -1.2, 0)

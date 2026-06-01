@@ -14,6 +14,7 @@ func _ready():
 	print("Mosin Ready. Ammo: ", current_ammo, "/", MAX_AMMO, " | Reserve: ", reserve_ammo)
 	
 	add_to_group("mosin_weapon")
+	sync_ammo_to_ui()
 
 # --- NEW AMMO INVENTORY LOGIC ---
 func add_reserve_ammo(amount: int):
@@ -43,6 +44,7 @@ func action_fire():
 
 	# Fire the weapon
 	current_ammo -= 1
+	sync_ammo_to_ui()
 	print("BANG! Ammo left: ", current_ammo, " | Reserve: ", reserve_ammo)
 	
 	#recoil and kick
@@ -100,6 +102,7 @@ func start_clip_reload():
 	if current_state == WeaponState.RELOADING:
 		reserve_ammo -= MAX_AMMO
 		current_ammo = MAX_AMMO
+		sync_ammo_to_ui()
 		current_state = WeaponState.READY
 		print("Clip loaded! Chamber: ", current_ammo, " | Reserve: ", reserve_ammo)
 
@@ -130,6 +133,7 @@ func start_looping_reload():
 			if current_state == WeaponState.RELOADING:
 				current_ammo += 1
 				reserve_ammo -= 1
+				sync_ammo_to_ui()
 				print("Loaded 1 round. Chamber: ", current_ammo, " | Reserve: ", reserve_ammo)
 
 	# 3. Close the bolt (This plays whether the loop finished naturally OR was interrupted)
@@ -142,3 +146,8 @@ func start_looping_reload():
 		current_state = WeaponState.READY
 	else:
 		current_state = WeaponState.EMPTY
+		
+func sync_ammo_to_ui():
+		var player = get_tree().get_first_node_in_group("player")
+		if player and player.has_method("update_ammo_ui"):
+			player.update_ammo_ui(current_ammo, reserve_ammo)	
