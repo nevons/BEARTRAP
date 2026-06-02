@@ -23,7 +23,9 @@ func interact():
 		if item_enum_id == 1:
 			var mosin = get_tree().get_first_node_in_group("mosin_weapon")
 			player.update_ammo_ui(mosin.current_ammo, mosin.reserve_ammo)
-		
+		elif item_enum_id == 2:
+			var flashlight = get_tree().get_first_node_in_group("flashlight")
+			player.pickup_flashlight()
 		# Disable collisions so the player can't interact with it twice
 		monitorable = false
 		monitoring = false

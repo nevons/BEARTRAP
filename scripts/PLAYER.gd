@@ -8,6 +8,7 @@ var speed
 @export var WALK_SPEED = 3.0
 @export var SPRINT_SPEED = 5.0
 
+#motion states
 var _is_crouching : bool = false
 var _is_running : bool = false
 
@@ -48,6 +49,26 @@ const BOB_FREQ_CROUCH = 6.0
 const BOB_AMP_CROUCH = 0.005
 
 var bob_timer: float = 0.0
+
+# --- Flashlight System ---
+@onready var hand_light: SpotLight3D = $Head/Camera3D/HandContainer/FlashlightMesh/SpotLight3D
+@onready var belt_light: SpotLight3D = $BeltPosition/FlashlightLight
+@onready var flashlight_mesh = $Head/Camera3D/HandContainer/FlashlightMesh
+# Update this path to exactly where your battery bar is:
+@onready var battery_ui: TextureProgressBar = $UI/BatteryContainer/TextureProgressBar 
+
+var max_battery: float = 100.0
+var current_battery: float = 100.0
+
+var drain_rate: float = 1.5   # How fast it dies per second while ON
+var charge_rate: float = 6.0 # How fast it charges per second while CRANKING
+
+var max_energy: float = 5.0   # The maximum brightness
+var min_energy: float = 0.05  # A pathetic, barely-visible glow when dead
+var max_angle: float = 60.0   # Wide cone when fully charged
+var min_angle: float = 15.0   # Tight, focused beam when dying
+var has_flashlight : bool = false
+var is_flashlight_on: bool = false
  
 # Add one AudioStream per surface type in the Inspector.
 # Tag your floor/terrain nodes with matching groups:
@@ -90,6 +111,10 @@ func _ready():
 	#headbonker exception is us!
 	headbbonker.add_exception($".")
 	
+	# Hide the entire battery container on startup
+	if $UI/BatteryContainer:
+		$UI/BatteryContainer.visible = false
+	
 func _unhandled_input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		head.rotate_x(deg_to_rad(-event.relative.y * sensitivity))
@@ -108,6 +133,9 @@ func _unhandled_input(event):
 	if event.is_action_pressed("interact"):
 		try_interaction()
 
+func _input(event):
+	if event.is_action_pressed("toggle_flashlight"): # Make sure this is mapped in Input Map!
+		is_flashlight_on = !is_flashlight_on
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -188,7 +216,21 @@ func _physics_process(delta):
 	else:
 		_is_running = false
 		
-	
+	# --- Flashlight Math ---
+	if has_flashlight:
+		# 1. Handle Charging 
+		if flashlight_mesh.visible and Input.is_action_pressed("fire"): 
+			current_battery += charge_rate * delta
+		
+		# 2. Handle Draining 
+		elif is_flashlight_on:
+			current_battery -= drain_rate * delta
+			
+		# 3. Keep the battery within 0 to 100 bounds
+		current_battery = clamp(current_battery, 0.0, max_battery)
+		
+	# 4. Update the visual lights
+	_update_flashlight_visuals()
 	
 	# ---- Camera bob + footsteps (after move_and_slide so velocity is final) ----
 	var is_moving = velocity.length() > 0.5 and is_on_floor()
@@ -390,3 +432,44 @@ func stop_reload_ui():
 	if reload_tween:
 		reload_tween.kill()
 	reload_ring.visible = false
+
+func _update_flashlight_visuals():
+	if not has_flashlight:
+		hand_light.visible = false
+		belt_light.visible = false
+		return
+	# Get a percentage between 0.0 (empty) and 1.0 (full)
+	var power_percent = current_battery / max_battery
+	
+	# Calculate the new brightness and cone size based on the battery percentage
+	var current_energy = lerp(min_energy, max_energy, power_percent)
+	var current_angle = lerp(min_angle, max_angle, power_percent)
+	
+	# Apply to the Hand Light
+	hand_light.light_energy = current_energy
+	hand_light.spot_angle = current_angle
+	
+	# Apply to the Belt Light
+	belt_light.light_energy = current_energy
+	belt_light.spot_angle = current_angle
+	
+	# Turn them on/off based on the player's toggle state and if it's equipped
+	if is_flashlight_on and current_battery > 0:
+		hand_light.visible = flashlight_mesh.visible
+		belt_light.visible = not flashlight_mesh.visible
+	else:
+		hand_light.visible = false
+		belt_light.visible = false
+		
+	# Update the UI Bar
+	if battery_ui:
+		battery_ui.value = current_battery
+
+func pickup_flashlight():
+	has_flashlight = true
+	
+	# Reveal the UI container!
+	if $UI/BatteryContainer:
+		$UI/BatteryContainer.visible = true
+		
+	print("Flashlight acquired!")
