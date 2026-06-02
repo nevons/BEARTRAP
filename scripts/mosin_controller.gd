@@ -126,13 +126,18 @@ func start_looping_reload():
 
 	current_state = WeaponState.RELOADING
 	print("Starting reload...")
-	var anim_length = anim_player.get_animation("reload_insert").length * (MAX_AMMO- current_ammo)
-	player.start_reload_ui(anim_length)
+	if current_ammo==0:
+		var anim_length =anim_player.get_animation("reload_start").length + anim_player.get_animation("reload_insert").length * (reserve_ammo)+ anim_player.get_animation("reload_end").length
+		player.start_reload_ui(anim_length)
+	else:
+		var anim_length =anim_player.get_animation("reload_start").length + anim_player.get_animation("reload_insert").length * (MAX_AMMO- current_ammo)+ anim_player.get_animation("reload_end").length
+		player.start_reload_ui(anim_length)
 	# 1. Open the bolt
 	
 	if anim_player.has_animation("reload_start"):
 		anim_player.play("reload_start")
 		await anim_player.animation_finished
+		
 
 	# 2. Loop the bullet insertion
 	while current_ammo < MAX_AMMO and reserve_ammo > 0 and current_state == WeaponState.RELOADING:
