@@ -35,7 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://cgjrsa303ldcx" path="res://assets/models/mosin/clip/clip_7_9.jpg" id="29_8irta"]
 [ext_resource type="Texture2D" uid="uid://bupx22g5g0qp7" path="res://assets/models/mosin/clip/clip_7_10.png" id="30_12bh3"]
 [ext_resource type="Texture2D" uid="uid://c2choebmousba" path="res://assets/models/mosin/clip/clip_7_11.jpg" id="31_ptbnk"]
-[ext_resource type="PackedScene" uid="uid://58aoyf4eqn2n" path="res://assets/models/flashlight.glb" id="35_qftmw"]
+[ext_resource type="PackedScene" uid="uid://58aoyf4eqn2n" path="res://assets/models/flashlight/flashlight.glb" id="35_qftmw"]
 [ext_resource type="FontFile" uid="uid://di3t17cif078q" path="res://assets/fonts/Kyiv Machine.ttf" id="36_6dbgp"]
 [ext_resource type="Texture2D" uid="uid://bj164shd037vk" path="res://assets/textures/reloadring/whitering.webp" id="36_yobr8"]
 [ext_resource type="Texture2D" uid="uid://bdt34o45it10a" path="res://assets/textures/battery/battery inner.png" id="38_qftmw"]

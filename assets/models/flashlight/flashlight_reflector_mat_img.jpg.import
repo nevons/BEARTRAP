@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://844fvgaxbby"
-path.s3tc="res://.godot/imported/flashlight_rust_mat_img.jpg-d17fafea42eeaff80030a6e83d936211.s3tc.ctex"
+uid="uid://dp5rdrxvjbg3g"
+path.s3tc="res://.godot/imported/flashlight_reflector_mat_img.jpg-2ffbf62e07c124b6878a69291653789c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "71a49a1aa2846640523ce54523a1075e"
+"md5": "bd0ab47afe90bbbc78615e40d1e7d027"
 }
 
 [deps]
 
-source_file="res://assets/models/flashlight_rust_mat_img.jpg"
-dest_files=["res://.godot/imported/flashlight_rust_mat_img.jpg-d17fafea42eeaff80030a6e83d936211.s3tc.ctex"]
+source_file="res://assets/models/flashlight/flashlight_reflector_mat_img.jpg"
+dest_files=["res://.godot/imported/flashlight_reflector_mat_img.jpg-2ffbf62e07c124b6878a69291653789c.s3tc.ctex"]
 
 [params]
 

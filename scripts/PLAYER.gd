@@ -219,7 +219,7 @@ func _physics_process(delta):
 	# --- Flashlight Math ---
 	if has_flashlight:
 		# 1. Handle Charging 
-		if flashlight_mesh.visible and Input.is_action_pressed("fire"): 
+		if flashlight_mesh.visible and Input.is_action_pressed("recharge"): 
 			current_battery += charge_rate * delta
 		
 		# 2. Handle Draining 
