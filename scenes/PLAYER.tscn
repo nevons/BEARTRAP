@@ -1,4 +1,4 @@
-[gd_scene load_steps=166 format=4 uid="uid://dp3up1qky8mfq"]
+[gd_scene load_steps=167 format=4 uid="uid://dp3up1qky8mfq"]
 
 [ext_resource type="Script" uid="uid://bx5vdnhgg6epu" path="res://scripts/PLAYER.gd" id="1_r53wf"]
 [ext_resource type="AudioStream" uid="uid://csktmykqk26gj" path="res://assets/audio/footstep_wood/wood1.wav" id="2_hruy7"]
@@ -39,6 +39,7 @@
 [ext_resource type="FontFile" uid="uid://di3t17cif078q" path="res://assets/fonts/Kyiv Machine.ttf" id="36_6dbgp"]
 [ext_resource type="Texture2D" uid="uid://bj164shd037vk" path="res://assets/textures/reloadring/whitering.webp" id="36_yobr8"]
 [ext_resource type="Texture2D" uid="uid://bdt34o45it10a" path="res://assets/textures/battery/battery inner.png" id="38_qftmw"]
+[ext_resource type="PackedScene" uid="uid://f61fsis6k5y3" path="res://scenes/health_component.tscn" id="40_8irta"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a1u3h"]
 
@@ -3258,5 +3259,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.292604, 0, -0.422618)
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 visible = false
 light_energy = 5.0
+
+[node name="HealthComponent" parent="." instance=ExtResource("40_8irta")]
 
 [connection signal="animation_started" from="CharacterBody3D/AnimationPlayer" to="CharacterBody3D" method="_on_animation_player_animation_started"]

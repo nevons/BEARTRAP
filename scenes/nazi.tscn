@@ -1,0 +1,114 @@
+[gd_scene load_steps=11 format=3 uid="uid://bhrodk7n4xmnk"]
+
+[ext_resource type="PackedScene" uid="uid://btc48r85dnei8" path="res://assets/models/nazi/nazi.glb" id="1_h0crx"]
+[ext_resource type="PackedScene" uid="uid://f61fsis6k5y3" path="res://scenes/health_component.tscn" id="2_touwq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_touwq"]
+size = Vector3(0.695435, 0.829224, 0.815796)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wkhdd"]
+size = Vector3(0.676758, 1.0968, 0.707581)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xbmo1"]
+size = Vector3(0.57193, 0.366211, 0.851074)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0x1rj"]
+size = Vector3(0.360718, 1.86241, 0.34436)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cw5xp"]
+size = Vector3(0.3069, 0.840393, 0.313721)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7kg72"]
+size = Vector3(0.301331, 0.987061, 0.353882)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m363e"]
+size = Vector3(0.468464, 2.31122, 0.385559)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n1mim"]
+size = Vector3(0.479248, 2.27344, 0.358337)
+
+[node name="nazi" instance=ExtResource("1_h0crx")]
+
+[node name="Head" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(1, 3.8743e-07, 2.78469e-07, -3.8743e-07, 1, 5.35091e-09, -2.78469e-07, -5.35102e-09, 1, -0.595533, 4.04394, -0.177383)
+bone_name = "head"
+bone_idx = 3
+
+[node name="Hurtbox_Head" type="Area3D" parent="Armature/Skeleton3D/Head" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.601594, 4.39605, -0.172218)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/Head/Hurtbox_Head" index="0"]
+transform = Transform3D(1, 1.49009e-15, 0, 1.49009e-15, 1, 0, 0, 0, 1, 0.636145, -3.97196, 0.182448)
+shape = SubResource("BoxShape3D_touwq")
+
+[node name="Torso" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.994199, -0.107555, -1.03308e-07, 0.107555, 0.994199, -6.50583e-09, 1.03408e-07, -4.64319e-09, 1, -0.623754, 2.5325, -0.177383)
+bone_name = "torso.lower"
+bone_idx = 0
+
+[node name="Hurtbox_Torso" type="Area3D" parent="Armature/Skeleton3D/Torso" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/Torso/Hurtbox_Torso" index="0"]
+transform = Transform3D(0.988415, 0.151778, 1.90277e-09, -0.151778, 0.988415, 1.56413e-08, 4.93827e-10, -1.5749e-08, 1, 0.111416, 0.516393, -0.00961304)
+shape = SubResource("BoxShape3D_wkhdd")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Armature/Skeleton3D/Torso/Hurtbox_Torso" index="1"]
+transform = Transform3D(0.992698, 0.120622, 1.3151e-09, -0.120622, 0.992698, 1.24394e-08, 1.94973e-10, -1.25072e-08, 1, 0.223491, 1.26021, 0.0124512)
+shape = SubResource("BoxShape3D_xbmo1")
+
+[node name="Arm_L" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.982903, 0.183241, -0.0179853, 0.183922, -0.981692, 0.0495304, -0.00857992, -0.0519913, -0.998611, -0.5777, 3.58051, 0.474212)
+bone_name = "upper_arm.L"
+bone_idx = 6
+
+[node name="Hurtbox_Arm_L" type="Area3D" parent="Armature/Skeleton3D/Arm_L" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/Arm_L/Hurtbox_Arm_L" index="0"]
+transform = Transform3D(0.999915, -0.000813671, -0.0127708, 0.0016832, 0.997664, 0.0682644, 0.012685, -0.0682806, 0.997575, -0.0113695, 0.689631, -0.0477033)
+shape = SubResource("BoxShape3D_0x1rj")
+
+[node name="Arm_R_upper" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(0.984758, 0.128333, 0.117395, 0.123524, -0.991209, 0.047393, 0.122445, -0.0321692, -0.991954, -0.539147, 3.53539, -0.817502)
+bone_name = "upper_arm.R"
+bone_idx = 21
+
+[node name="Hurtbox_Arm_R_upper" type="Area3D" parent="Armature/Skeleton3D/Arm_R_upper" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/Arm_R_upper/Hurtbox_Arm_R_upper" index="0"]
+transform = Transform3D(1, -1.61119e-07, 0, -5.6345e-08, 1, 3.72529e-09, -5.96046e-08, 3.72529e-09, 1, -0.0454481, 0.101411, 0.0281987)
+shape = SubResource("BoxShape3D_cw5xp")
+
+[node name="Arm_R_lower" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="5"]
+transform = Transform3D(0.984839, 0.128291, 0.116761, 0.126588, -0.991713, 0.0219178, 0.118606, -0.00680467, -0.992918, -0.463749, 2.95304, -0.836402)
+bone_name = "forearm.R"
+bone_idx = 22
+
+[node name="Hurtbox_Arm_R_lower" type="Area3D" parent="Armature/Skeleton3D/Arm_R_lower" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/Arm_R_lower/Hurtbox_Arm_R_lower" index="0"]
+transform = Transform3D(0.991022, -0.133692, 2.16067e-07, 0.133692, 0.99102, 2.14204e-08, -2.16067e-07, -1.49012e-08, 0.999999, -0.143676, 0.44513, 0.0147904)
+shape = SubResource("BoxShape3D_7kg72")
+
+[node name="Leg_L" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="6"]
+transform = Transform3D(-0.989978, 0.0440938, -0.134173, -0.0429529, -0.999014, -0.0113873, -0.134542, -0.00551033, 0.990893, -0.660343, 1.57382, 0.132029)
+bone_name = "leg.L"
+bone_idx = 36
+
+[node name="Hurtbox_Leg_L" type="Area3D" parent="Armature/Skeleton3D/Leg_L" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/Leg_L/Hurtbox_Leg_L" index="0"]
+transform = Transform3D(0.9987, 0.0509333, -0.00267997, -0.0509874, 0.995438, -0.0801557, -0.00141121, 0.0801869, 0.996752, -0.0418768, 0.204994, -0.0071698)
+shape = SubResource("BoxShape3D_m363e")
+
+[node name="Leg_R" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="7"]
+transform = Transform3D(0.988683, 0.0894893, 0.120408, 0.0840975, -0.995245, 0.049149, 0.124234, -0.0384668, -0.991507, -0.680266, 1.57512, -0.454118)
+bone_name = "leg.R"
+bone_idx = 40
+
+[node name="Hurtbox_Leg_R" type="Area3D" parent="Armature/Skeleton3D/Leg_R" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/Leg_R/Hurtbox_Leg_R" index="0"]
+transform = Transform3D(0.991401, -0.130257, 0.0132423, 0.130564, 0.991134, -0.0261644, -0.00971615, 0.0276671, 0.999576, 0.0535533, 0.228316, -0.0100651)
+shape = SubResource("BoxShape3D_n1mim")
+
+[node name="HealthComponent" parent="." index="2" instance=ExtResource("2_touwq")]
