@@ -38,12 +38,10 @@ func unlock_and_equip_item(item_id: int):
 	if item_id == EquippedItem.MOSIN:
 		has_mosin = true
 		switch_to(EquippedItem.MOSIN)
-		print("Mosin-Nagant acquired.")
 	elif item_id == EquippedItem.FLASHLIGHT:
 		has_flashlight = true
 		flashlight_light_belt.visible = true # The belt light can now function
 		switch_to(EquippedItem.FLASHLIGHT)
-		print("Flashlight acquired.")
 
 func switch_to(new_item: EquippedItem):
 	current_item = new_item

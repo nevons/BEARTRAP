@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://h20ye3rajsu5"
-path="res://.godot/imported/nazi.glb-a4547ff97dc4cfe14fdb48e6cbbd39b3.scn"
+uid="uid://bks1hv4bkn81a"
+path="res://.godot/imported/cone.glb-90887cc728acb3efe9d3c022359ee1a7.scn"
 
 [deps]
 
-source_file="res://assets/models/nazi/nazi.glb"
-dest_files=["res://.godot/imported/nazi.glb-a4547ff97dc4cfe14fdb48e6cbbd39b3.scn"]
+source_file="res://assets/tools/cone.glb"
+dest_files=["res://.godot/imported/cone.glb-90887cc728acb3efe9d3c022359ee1a7.scn"]
 
 [params]
 

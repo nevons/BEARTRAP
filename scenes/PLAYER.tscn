@@ -2700,9 +2700,7 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lny2x"]
 
-[node name="Node3D" type="Node3D"]
-
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." groups=["player"]]
+[node name="PLAYER" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
 floor_stop_on_slope = false
 script = ExtResource("1_r53wf")
@@ -2711,464 +2709,464 @@ wood_steps = Array[AudioStream]([ExtResource("2_hruy7"), ExtResource("3_kbg3k"),
 metal_steps = Array[AudioStream]([ExtResource("6_ubknb"), ExtResource("7_54cwh"), ExtResource("8_0k08p"), ExtResource("9_yovmp")])
 default_steps = Array[AudioStream]([ExtResource("14_ib3ru"), ExtResource("15_ua83o"), ExtResource("16_0hybe"), ExtResource("17_n38qo")])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_a1u3h")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 mesh = SubResource("CapsuleMesh_e72px")
 skeleton = NodePath("../..")
 
-[node name="Head" type="Node3D" parent="CharacterBody3D"]
+[node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.266513, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Head"]
+[node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.287777, 0)
 current = true
 
-[node name="InteractionRay" type="RayCast3D" parent="CharacterBody3D/Head/Camera3D"]
+[node name="InteractionRay" type="RayCast3D" parent="Head/Camera3D"]
 target_position = Vector3(0, 0, -2)
 collision_mask = 2
 collide_with_areas = true
 
-[node name="HandContainer" type="Node3D" parent="CharacterBody3D/Head/Camera3D"]
+[node name="HandContainer" type="Node3D" parent="Head/Camera3D"]
 script = ExtResource("18_ua83o")
 
-[node name="MosinMesh" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer" groups=["mosin_weapon"]]
+[node name="MosinMesh" type="Node3D" parent="Head/Camera3D/HandContainer" groups=["mosin_weapon"]]
 script = ExtResource("19_n38qo")
 
-[node name="low_poly_mosin" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh"]
+[node name="low_poly_mosin" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh"]
 transform = Transform3D(-3.61999e-06, 0, 1, 0, 1, 0, -1, 0, -3.61999e-06, 0.439, -0.218, -0.725)
 
-[node name="Sketchfab_model" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
+[node name="Sketchfab_model" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
 transform = Transform3D(0.133737, 0, 0, 0, 2.96957e-17, 0.133737, 0, -0.133737, 2.96957e-17, 0, 0, 0)
 
-[node name="Root" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model"]
+[node name="Root" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model"]
 
-[node name="Lamp" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Lamp" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.48231, -0.876, 0.00045, 0.29583, 0.16239, -0.94134, 0.82454, 0.45415, 0.33747, -0.91947, -12.3061, 4.72874)
 
-[node name="Lamp2" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Lamp"]
+[node name="Lamp2" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Lamp"]
 
-[node name="Cube" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.16469, 0, 0, 0, 0.12654, 0, 0, 0, 0.16469, -0.9095, 0, 0.2163)
 
-[node name="Cube_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube"]
+[node name="Cube_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube"]
 mesh = SubResource("ArrayMesh_0hybe")
 skeleton = NodePath("")
 
-[node name="Cylinder" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cylinder" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0, 0, -0.05595, -0.02798, 0.04846, 0, 0.04846, 0.02798, 0, 4.66143, 0, 0.38241)
 
-[node name="Cylinder_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder"]
+[node name="Cylinder_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder"]
 mesh = SubResource("ArrayMesh_n38qo")
 skeleton = NodePath("")
 
-[node name="Cube_003" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_003" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.13891, 0, 0, 0, 0.06124, 0, 0, 0, 0.13891, -1.64214, 0, -0.14635)
 
-[node name="Cube_003_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_003"]
+[node name="Cube_003_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_003"]
 mesh = SubResource("ArrayMesh_ehigy")
 skeleton = NodePath("")
 
-[node name="Cube_004" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_004" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.01217, 0, 0, 0, 0.04341, 0, 0, 0, 0.01217, -2.10277, 0, -0.30193)
 
-[node name="Cube_004_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_004"]
+[node name="Cube_004_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_004"]
 mesh = SubResource("ArrayMesh_gtncy")
 skeleton = NodePath("")
 
-[node name="Cylinder_001" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cylinder_001" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.02505, 0, 0, 0, 0, -0.0571, 0, 0.02505, 0, -1.02626, 0, -0.04878)
 
-[node name="Cylinder_001_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder_001"]
+[node name="Cylinder_001_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder_001"]
 mesh = SubResource("ArrayMesh_lx5bl")
 skeleton = NodePath("")
 
-[node name="Cube_005" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_005" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.01854, 0, 0, 0, 0.01854, 0, 0, 0, 0.01854, -2.0493, 0, -0.06276)
 
-[node name="Cube_005_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_005"]
+[node name="Cube_005_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_005"]
 mesh = SubResource("ArrayMesh_i10kl")
 skeleton = NodePath("")
 
-[node name="Cylinder_002" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cylinder_002" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.04655, 0, 0, 0, 0, -0.11684, 0, 0.04655, 0, -0.85091, 0, 0.24093)
 
-[node name="Cylinder_002_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder_002"]
+[node name="Cylinder_002_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder_002"]
 mesh = SubResource("ArrayMesh_s4asc")
 skeleton = NodePath("")
 
-[node name="Cube_008" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_008" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.01991, 0, 0, 0, 0.01675, 0, 0, 0, 0.01991, 0.59179, -0.0831, 0.27771)
 
-[node name="Cube_008_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_008"]
+[node name="Cube_008_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_008"]
 mesh = SubResource("ArrayMesh_r2enu")
 skeleton = NodePath("")
 
-[node name="Cube_009" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_009" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.06654, 0, 0, 0, 0.05502, 0, 0, 0, 0.06654, 3.94872, 0, 0.30206)
 
-[node name="Cube_009_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_009"]
+[node name="Cube_009_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_009"]
 mesh = SubResource("ArrayMesh_vt2ka")
 skeleton = NodePath("")
 
-[node name="Cube_010" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_010" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.03188, 0, 0, 0, 0.07619, 0, 0, 0, 0.03188, 3.80549, 0, 0.4355)
 
-[node name="Cube_010_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_010"]
+[node name="Cube_010_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_010"]
 mesh = SubResource("ArrayMesh_4mmrk")
 skeleton = NodePath("")
 
-[node name="Cube_011" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_011" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.03702, 0, 0, 0, 0.04269, 0, 0, 0, 0.03702, 4.4686, 0, 0.4664)
 
-[node name="Cube_011_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_011"]
+[node name="Cube_011_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_011"]
 mesh = SubResource("ArrayMesh_1505x")
 skeleton = NodePath("")
 
-[node name="Cylinder_003" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cylinder_003" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0, 0, -0.04431, 0, 0.06902, 0, 0.06902, 0, 0, 4.47323, 0, 0.56116)
 
-[node name="Cylinder_003_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder_003"]
+[node name="Cylinder_003_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder_003"]
 mesh = SubResource("ArrayMesh_xbr4n")
 skeleton = NodePath("")
 
-[node name="Cube_012" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_012" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.0123, 0, 0, 0, 0.00696, 0, 0, 0, 0.0123, 4.45645, 0, 0.52347)
 
-[node name="Cube_012_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_012"]
+[node name="Cube_012_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_012"]
 mesh = SubResource("ArrayMesh_unvn8")
 skeleton = NodePath("")
 
-[node name="Cube_013" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_013" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.01991, 0, 0, 0, 0.01675, 0, 0, 0, 0.01991, 3.18736, -0.0831, 0.28979)
 
-[node name="Cube_013_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_013"]
+[node name="Cube_013_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_013"]
 mesh = SubResource("ArrayMesh_g5e30")
 skeleton = NodePath("")
 
-[node name="Cylinder_004" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cylinder_004" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0, 0, 0.01911, 0, 0.01911, 0, -0.01911, 0, 0, 3.95802, 0, 0.23154)
 
-[node name="Cylinder_004_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder_004"]
+[node name="Cylinder_004_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder_004"]
 mesh = SubResource("ArrayMesh_imxgk")
 skeleton = NodePath("")
 
-[node name="Cylinder_005" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cylinder_005" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0, 0, 0.01911, 0, 0.01911, 0, -0.01911, 0, 0, 3.95802, 0, 0.23154)
 
-[node name="Cylinder_005_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder_005"]
+[node name="Cylinder_005_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder_005"]
 mesh = SubResource("ArrayMesh_5jmb6")
 skeleton = NodePath("")
 
-[node name="Cube_001" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_001" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.07174, 0, 0, 0, 0.08918, 0, 0, 0, 0.07174, 0.75012, 0, 0.30675)
 
-[node name="Cube_001_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_001"]
+[node name="Cube_001_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_001"]
 mesh = SubResource("ArrayMesh_6dbgp")
 skeleton = NodePath("")
 
-[node name="Cube_002" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_002" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.0288, 0, 0, 0, 0.10261, 0, 0, 0, 0.03536, 0.64968, 0, 0.30791)
 
-[node name="Cube_002_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_002"]
+[node name="Cube_002_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_002"]
 mesh = SubResource("ArrayMesh_w4ug3")
 skeleton = NodePath("")
 
-[node name="Cube_006" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_006" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.0596, 0, 0, 0, 0.08512, 0, 0, 0, 0.0596, 0.7316, 0, 0.41879)
 
-[node name="Cube_006_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_006"]
+[node name="Cube_006_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_006"]
 mesh = SubResource("ArrayMesh_yobr8")
 skeleton = NodePath("")
 
-[node name="Cube_007" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_007" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.0288, 0, 0, 0, 0.10261, 0, 0, 0, 0.03536, 3.25796, 0, 0.30791)
 
-[node name="Cube_007_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_007"]
+[node name="Cube_007_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_007"]
 mesh = SubResource("ArrayMesh_qftmw")
 skeleton = NodePath("")
 
-[node name="Cube_014" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_014" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.02576, 0, 0, 0, 0.11116, 0, 0, 0, 0.02576, -4.75039, 0, -0.01523)
 
-[node name="Cube_014_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_014"]
+[node name="Cube_014_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_014"]
 mesh = SubResource("ArrayMesh_8irta")
 skeleton = NodePath("")
 
-[node name="Cube_015" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_015" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.03643, 0, 0, 0, 0.03643, 0, 0, 0, 0.03643, 0.53846, 0, 0.44719)
 
-[node name="Cube_015_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_015"]
+[node name="Cube_015_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_015"]
 mesh = SubResource("ArrayMesh_12bh3")
 skeleton = NodePath("")
 
-[node name="Cube_016" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_016" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.03523, 0, 0, 0, 0.03523, 0, 0, 0, 0.03523, 0.53846, 0, 0.44719)
 
-[node name="Cube_016_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_016"]
+[node name="Cube_016_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_016"]
 mesh = SubResource("ArrayMesh_ptbnk")
 skeleton = NodePath("")
 
-[node name="Cylinder_006" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cylinder_006" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0, 0, 0.12201, 0, 0.12201, 0, -0.12201, 0, 0, -0.97899, 0, 0.37368)
 
-[node name="Cylinder_006_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder_006"]
+[node name="Cylinder_006_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder_006"]
 mesh = SubResource("ArrayMesh_pkihq")
 skeleton = NodePath("")
 
-[node name="Cube_017" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_017" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.04027, 0, 0, 0, 0.07062, 0, 0, 0, 0.04027, -0.15371, 0, 0.44433)
 
-[node name="Cube_017_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_017"]
+[node name="Cube_017_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_017"]
 mesh = SubResource("ArrayMesh_3qr5q")
 skeleton = NodePath("")
 
-[node name="Cylinder_007" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cylinder_007" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.01443, 0, 0, 0, 0, -0.0761, 0, 0.01443, 0, 0.32854, 0, 0.49745)
 
-[node name="Cylinder_007_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder_007"]
+[node name="Cylinder_007_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder_007"]
 mesh = SubResource("ArrayMesh_sdmvo")
 skeleton = NodePath("")
 
-[node name="Cube_018" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_018" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.01417, 0, 0, 0, 0.04841, 0, 0, 0, 0.01417, -0.20937, 0, 0.51792)
 
-[node name="Cube_018_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_018"]
+[node name="Cube_018_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_018"]
 mesh = SubResource("ArrayMesh_rouk2")
 skeleton = NodePath("")
 
-[node name="Cube_019" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_019" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.02576, 0, 0, 0, 0.07828, 0, 0, 0, 0.02576, -0.088, 0, 0.51294)
 
-[node name="Cube_019_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_019"]
+[node name="Cube_019_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_019"]
 mesh = SubResource("ArrayMesh_k3ms8")
 skeleton = NodePath("")
 
-[node name="Cube_020" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_020" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.01654, 0, 0, 0, 0.0672, 0, 0, 0, 0.01654, -0.2337, 0, 0.52214)
 
-[node name="Cube_020_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_020"]
+[node name="Cube_020_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_020"]
 mesh = SubResource("ArrayMesh_27thi")
 skeleton = NodePath("")
 
-[node name="Cube_021" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_021" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.01646, 0, 0.00058, 0, 0.0931, 0, -0.00058, 0, 0.01646, -0.09112, 0, 0.51234)
 
-[node name="Cube_021_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_021"]
+[node name="Cube_021_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_021"]
 mesh = SubResource("ArrayMesh_n0yo0")
 skeleton = NodePath("")
 
-[node name="Cube_023" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_023" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.06439, 0, 0, 0, 0.11743, 0, 0, 0, 0.06439, -1.98963, 0, 0.42759)
 
-[node name="Cube_023_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_023"]
+[node name="Cube_023_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_023"]
 mesh = SubResource("ArrayMesh_8iww1")
 skeleton = NodePath("")
 
-[node name="Cube_025" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_025" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.03216, 0, 0, 0, 0.01922, 0, 0, 0, 0.03216, -2.11603, 0, 0.30674)
 
-[node name="Cube_025_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_025"]
+[node name="Cube_025_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_025"]
 mesh = SubResource("ArrayMesh_qvuba")
 skeleton = NodePath("")
 
-[node name="Cube_022" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_022" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.16469, 0, 0, 0, 0.12654, 0, 0, 0, 0.16469, -0.9095, 0, 0.2163)
 
-[node name="Cube_022_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_022"]
+[node name="Cube_022_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_022"]
 mesh = SubResource("ArrayMesh_n47bk")
 skeleton = NodePath("")
 
-[node name="Cube_028" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cube_028" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.01302, 0, -0.00326, 0, 0.02115, 0, 0.00326, 0, 0.01302, -2.37742, 0, 0.26187)
 
-[node name="Cube_028_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_028"]
+[node name="Cube_028_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cube_028"]
 mesh = SubResource("ArrayMesh_tgb75")
 skeleton = NodePath("")
 
-[node name="Cylinder_012" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
+[node name="Cylinder_012" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root"]
 transform = Transform3D(0.01913, 0, 0, 0, 0.01913, 0, 0, 0, 0.01913, -2.31413, 0, 0.26651)
 
-[node name="Cylinder_012_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder_012"]
+[node name="Cylinder_012_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/Sketchfab_model/Root/Cylinder_012"]
 mesh = SubResource("ArrayMesh_pfvcc")
 skeleton = NodePath("")
 
-[node name="BoltPivot" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
+[node name="BoltPivot" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.202395, 0.0562705, 0.00519956)
 
-[node name="Cylinder_008" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot"]
+[node name="Cylinder_008" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot"]
 transform = Transform3D(0, 0, 0.00896977, -0.00896977, 1.99169e-18, 0, -1.99169e-18, -0.00896977, 0, 0.0430161, -0.00629553, -0.00519956)
 
-[node name="Cylinder_008_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot/Cylinder_008"]
+[node name="Cylinder_008_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot/Cylinder_008"]
 mesh = SubResource("ArrayMesh_tyf1m")
 skeleton = NodePath("")
 
-[node name="Cylinder_009" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot"]
+[node name="Cylinder_009" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot"]
 transform = Transform3D(0, 0, 0.0119534, -0.0119534, 2.6542e-18, 0, -2.6542e-18, -0.0119534, 0, -0.106676, -0.00629553, -0.00519956)
 
-[node name="Cylinder_009_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot/Cylinder_009"]
+[node name="Cylinder_009_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot/Cylinder_009"]
 mesh = SubResource("ArrayMesh_aa8tp")
 skeleton = NodePath("")
 
-[node name="Cube_024" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot"]
+[node name="Cube_024" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot"]
 transform = Transform3D(0.00627496, 0, 0, 0, 1.39451e-18, 0.00627496, 0, -0.00628031, 1.39332e-18, -0.0829859, 0.00395811, -0.00519956)
 
-[node name="Cube_024_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot/Cube_024"]
+[node name="Cube_024_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot/Cube_024"]
 mesh = SubResource("ArrayMesh_104cv")
 skeleton = NodePath("")
 
-[node name="Cube_026" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot"]
+[node name="Cube_026" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot"]
 transform = Transform3D(0.00775677, 0, 0, 0, 1.72235e-18, 0.00775677, 0, -0.00775677, 1.72235e-18, 0.0430161, -0.00629553, 0.00196341)
 
-[node name="Cube_026_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot/Cube_026"]
+[node name="Cube_026_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot/Cube_026"]
 mesh = SubResource("ArrayMesh_fb3pq")
 skeleton = NodePath("")
 
-[node name="Cylinder_010" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot"]
+[node name="Cylinder_010" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot"]
 transform = Transform3D(0, 0, 0.00209032, -0.0097655, 2.16838e-18, 0, -2.16838e-18, -0.0097655, 0, 0.0430161, -0.00629553, -0.00519956)
 
-[node name="Cylinder_010_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot/Cylinder_010"]
+[node name="Cylinder_010_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot/Cylinder_010"]
 mesh = SubResource("ArrayMesh_ae24m")
 skeleton = NodePath("")
 
-[node name="Cylinder_011" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot"]
+[node name="Cylinder_011" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot"]
 transform = Transform3D(0.00543509, 0, 0, 0, -0.00543509, 1.20683e-18, 0, -1.20683e-18, -0.00543509, -0.00634372, -0.00596787, 0.00972553)
 
-[node name="Cylinder_011_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot/Cylinder_011"]
+[node name="Cylinder_011_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot/Cylinder_011"]
 mesh = SubResource("ArrayMesh_mp3a0")
 skeleton = NodePath("")
 
-[node name="Icosphere" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot"]
+[node name="Icosphere" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot"]
 transform = Transform3D(0.0115937, 0, 0, 0, 2.57432e-18, 0.0115937, 0, -0.0115937, 2.57432e-18, -0.00639988, -0.00624738, 0.0435878)
 
-[node name="Icosphere_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot/Icosphere"]
+[node name="Icosphere_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot/Icosphere"]
 mesh = SubResource("ArrayMesh_bjtnv")
 skeleton = NodePath("")
 
-[node name="Cube_027" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot"]
+[node name="Cube_027" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot"]
 transform = Transform3D(0.0048881, 0, 0, 0, 1.08538e-18, 0.0048881, 0, -0.0048881, 1.08538e-18, -0.00122961, -0.00539548, 0.00664422)
 
-[node name="Cube_027_0" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot/Cube_027"]
+[node name="Cube_027_0" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/BoltPivot/Cube_027"]
 mesh = SubResource("ArrayMesh_3xbgn")
 skeleton = NodePath("")
 
-[node name="bolt_open" type="AudioStreamPlayer3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
+[node name="bolt_open" type="AudioStreamPlayer3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
 stream = ExtResource("20_n38qo")
 
-[node name="bolt_close" type="AudioStreamPlayer3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
+[node name="bolt_close" type="AudioStreamPlayer3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
 stream = ExtResource("21_unvn8")
 
-[node name="bullet_loading" type="AudioStreamPlayer3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
+[node name="bullet_loading" type="AudioStreamPlayer3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
 stream = ExtResource("22_g5e30")
 
-[node name="chambering" type="AudioStreamPlayer3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
+[node name="chambering" type="AudioStreamPlayer3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
 stream = ExtResource("23_5jmb6")
 
-[node name="rifle_shot" type="AudioStreamPlayer3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
+[node name="rifle_shot" type="AudioStreamPlayer3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.603541, 0, 2.17557e-06)
 stream = ExtResource("23_g5e30")
 volume_db = 6.0
 
-[node name="gun_click" type="AudioStreamPlayer3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
+[node name="gun_click" type="AudioStreamPlayer3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.603541, 0, 2.17557e-06)
 stream = ExtResource("25_5jmb6")
 volume_db = 6.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Camera3D/HandContainer/MosinMesh"]
 libraries = {
 &"": SubResource("AnimationLibrary_gtncy")
 }
 
-[node name="Bullet" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh"]
+[node name="Bullet" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh"]
 transform = Transform3D(0.1, 7.52315e-38, 2.11758e-23, 0, 0.1, -3.55271e-16, -2.11758e-23, 3.55271e-16, 0.1, 0, 0, 0)
 visible = false
 
-[node name="defaultMaterial7" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/Bullet"]
+[node name="defaultMaterial7" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/Bullet"]
 mesh = SubResource("ArrayMesh_4stlk")
 skeleton = NodePath("")
 
-[node name="clip" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh"]
+[node name="clip" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh"]
 transform = Transform3D(-3.61999e-07, 0.1, 0, -0.1, -3.61999e-07, 0, 0, 0, 0.1, -0.204745, -0.518175, -0.564239)
 visible = false
 
-[node name="Sketchfab_model" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip"]
+[node name="Sketchfab_model" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip"]
 transform = Transform3D(1, 0, 0, 0, 2.22045e-16, 1, 0, -1, 2.22045e-16, 0, 0, 0)
 
-[node name="Collada visual scene group" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model"]
+[node name="Collada visual scene group" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 
-[node name="ClipOut" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group"]
+[node name="ClipOut" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group"]
 
-[node name="defaultMaterial13" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/ClipOut"]
+[node name="defaultMaterial13" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/ClipOut"]
 mesh = SubResource("ArrayMesh_xn0at")
 skeleton = NodePath("")
 
-[node name="Plane" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group"]
+[node name="Plane" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group"]
 
-[node name="defaultMaterial14" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Plane"]
+[node name="defaultMaterial14" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Plane"]
 mesh = SubResource("ArrayMesh_m1x2b")
 skeleton = NodePath("")
 
-[node name="Bullets" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group"]
+[node name="Bullets" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group"]
 
-[node name="7_62x54r_4" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets"]
+[node name="7_62x54r_4" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets"]
 transform = Transform3D(1, 0, 0, 0, 1, -3.55271e-15, -2.11758e-22, 3.55271e-15, 1, 0, 0, 0)
 
-[node name="defaultMaterial7" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets/7_62x54r_4"]
+[node name="defaultMaterial7" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets/7_62x54r_4"]
 mesh = SubResource("ArrayMesh_4stlk")
 skeleton = NodePath("")
 
-[node name="7_62x54r_3" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets"]
+[node name="7_62x54r_3" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets"]
 transform = Transform3D(1, 0, 0, 0, 1, -3.55271e-15, -2.11758e-22, 3.55271e-15, 1, 0, 0, 0)
 
-[node name="defaultMaterial8" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets/7_62x54r_3"]
+[node name="defaultMaterial8" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets/7_62x54r_3"]
 mesh = SubResource("ArrayMesh_llu83")
 skeleton = NodePath("")
 
-[node name="7_62x54r_2" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets"]
+[node name="7_62x54r_2" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets"]
 transform = Transform3D(1, 0, 0, 0, 1, -3.55271e-15, -2.11758e-22, 3.55271e-15, 1, 0, 0, 0)
 
-[node name="defaultMaterial9" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets/7_62x54r_2"]
+[node name="defaultMaterial9" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets/7_62x54r_2"]
 mesh = SubResource("ArrayMesh_f4csl")
 skeleton = NodePath("")
 
-[node name="7_62x54r_1" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets"]
+[node name="7_62x54r_1" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets"]
 transform = Transform3D(1, 0, 0, 0, 1, -3.55271e-15, -2.11758e-22, 3.55271e-15, 1, 0, 0, 0)
 
-[node name="defaultMaterial10" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets/7_62x54r_1"]
+[node name="defaultMaterial10" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets/7_62x54r_1"]
 mesh = SubResource("ArrayMesh_eg586")
 skeleton = NodePath("")
 
-[node name="7_62x54r_0" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets"]
+[node name="7_62x54r_0" type="Node3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets"]
 transform = Transform3D(1, 0, 0, 0, 1, -3.55271e-15, -2.11758e-22, 3.55271e-15, 1, 0, 0, 0)
 
-[node name="defaultMaterial11" type="MeshInstance3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets/7_62x54r_0"]
+[node name="defaultMaterial11" type="MeshInstance3D" parent="Head/Camera3D/HandContainer/MosinMesh/clip/Sketchfab_model/Collada visual scene group/Bullets/7_62x54r_0"]
 mesh = SubResource("ArrayMesh_qjfpv")
 skeleton = NodePath("")
 
-[node name="FlashlightMesh" type="Node3D" parent="CharacterBody3D/Head/Camera3D/HandContainer" groups=["flashlight"]]
+[node name="FlashlightMesh" type="Node3D" parent="Head/Camera3D/HandContainer" groups=["flashlight"]]
 
-[node name="flashlight" parent="CharacterBody3D/Head/Camera3D/HandContainer/FlashlightMesh" instance=ExtResource("35_qftmw")]
+[node name="flashlight" parent="Head/Camera3D/HandContainer/FlashlightMesh" instance=ExtResource("35_qftmw")]
 transform = Transform3D(-3.0598e-09, 0, -0.07, 0, 0.07, 0, 0.07, 0, -3.0598e-09, 0.44968, -0.192392, -0.453424)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="CharacterBody3D/Head/Camera3D/HandContainer/FlashlightMesh"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera3D/HandContainer/FlashlightMesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.473771, -0.123823, -0.531989)
 visible = false
 light_energy = 5.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_vrrui")
 }
 
-[node name="HEADBONKER" type="ShapeCast3D" parent="CharacterBody3D"]
+[node name="HEADBONKER" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.377886, 0)
 shape = SubResource("SphereShape3D_lny2x")
 target_position = Vector3(0, 0.5, 0)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="UI" type="Control" parent="CharacterBody3D"]
+[node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -3179,7 +3177,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="Reticle" type="CenterContainer" parent="CharacterBody3D/UI"]
+[node name="Reticle" type="CenterContainer" parent="UI"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.482639
@@ -3194,7 +3192,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_wwg6x")
 
-[node name="ReloadRing" type="TextureProgressBar" parent="CharacterBody3D/UI/Reticle"]
+[node name="ReloadRing" type="TextureProgressBar" parent="UI/Reticle"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 value = 28.0
@@ -3205,7 +3203,7 @@ texture_under = ExtResource("36_yobr8")
 texture_progress = ExtResource("36_yobr8")
 tint_under = Color(0, 0, 0, 1)
 
-[node name="AmmoContainer" type="MarginContainer" parent="CharacterBody3D/UI"]
+[node name="AmmoContainer" type="MarginContainer" parent="UI"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -3219,12 +3217,12 @@ grow_vertical = 0
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="Label" type="Label" parent="CharacterBody3D/UI/AmmoContainer"]
+[node name="Label" type="Label" parent="UI/AmmoContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("36_6dbgp")
 theme_override_font_sizes/font_size = 50
 
-[node name="BatteryContainer" type="MarginContainer" parent="CharacterBody3D/UI"]
+[node name="BatteryContainer" type="MarginContainer" parent="UI"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -3236,7 +3234,7 @@ offset_bottom = 2.0
 grow_vertical = 0
 scale = Vector2(0.269478, 0.924491)
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="CharacterBody3D/UI/BatteryContainer"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/BatteryContainer"]
 layout_mode = 2
 value = 51.0
 fill_mode = 3
@@ -3246,20 +3244,20 @@ texture_progress = ExtResource("38_qftmw")
 tint_under = Color(0, 0, 0, 1)
 tint_over = Color(0.308882, 0.882449, 2.31028e-06, 1)
 
-[node name="FootstepRay" type="RayCast3D" parent="CharacterBody3D"]
+[node name="FootstepRay" type="RayCast3D" parent="."]
 target_position = Vector3(0, -1.2, 0)
 
-[node name="FootstepPlayer" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
+[node name="FootstepPlayer" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.847525, 0)
 
-[node name="BeltPosition" type="Marker3D" parent="CharacterBody3D"]
+[node name="BeltPosition" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.292604, 0, -0.422618)
 
-[node name="FlashlightLight" type="SpotLight3D" parent="CharacterBody3D/BeltPosition"]
+[node name="FlashlightLight" type="SpotLight3D" parent="BeltPosition"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 visible = false
 light_energy = 5.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("40_8irta")]
 
-[connection signal="animation_started" from="CharacterBody3D/AnimationPlayer" to="CharacterBody3D" method="_on_animation_player_animation_started"]
+[connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]

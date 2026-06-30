@@ -471,5 +471,3 @@ func pickup_flashlight():
 	# Reveal the UI container!
 	if $UI/BatteryContainer:
 		$UI/BatteryContainer.visible = true
-		
-	print("Flashlight acquired!")
