@@ -299,4 +299,7 @@ height = 0.714844
 [node name="nazi" parent="." instance=ExtResource("10_yk7ts")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.54224, 0)
 
+[node name="vision" parent="nazi/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.999534, -0.0305322, 2.74018e-07, 0.0305322, 0.999534, 1.35907e-08, -2.74306e-07, -5.21795e-09, 1, -0.0163217, 3.73333, -0.000152637)
+
 [editable path="nazi"]

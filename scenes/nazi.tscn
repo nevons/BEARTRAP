@@ -2342,7 +2342,7 @@ mesh = SubResource("ArrayMesh_s7sta")
 skin = SubResource("Skin_5gyeg")
 
 [node name="vision" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(0.999534, -0.0305342, 2.74018e-07, 0.0305342, 0.999534, 1.35911e-08, -2.74305e-07, -5.21786e-09, 1, -0.0163225, 3.73333, -0.000152637)
+transform = Transform3D(0.999534, -0.0305322, 2.74018e-07, 0.0305322, 0.999534, 1.35907e-08, -2.74306e-07, -5.21795e-09, 1, -0.0163217, 3.73333, -0.000152637)
 bone_name = "head"
 bone_idx = 3
 

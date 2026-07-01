@@ -6,6 +6,8 @@ var current_item = EquippedItem.NONE
 # Track what the player has actually found in the cabin
 var has_mosin: bool = false
 var has_flashlight: bool = false
+var is_switching: bool = false
+
 
 @onready var mosin_mesh = $MosinMesh
 @onready var flashlight_mesh = $FlashlightMesh
@@ -44,6 +46,20 @@ func unlock_and_equip_item(item_id: int):
 		switch_to(EquippedItem.FLASHLIGHT)
 
 func switch_to(new_item: EquippedItem):
+	# Block the code if we are already in the middle of an intense weapon swap,
+	# or if we are already holding the requested item.
+	if is_switching or current_item == new_item:
+		return
+		
+	is_switching = true
+	
+	# If we are holding the Mosin and trying to put it away...
+	if current_item == EquippedItem.MOSIN and new_item != EquippedItem.MOSIN:
+		# ...tell the Mosin to pack up, and WAIT for it to finish!
+		if mosin_mesh.has_method("prepare_to_stow"):
+			await mosin_mesh.prepare_to_stow()
+
+	# Once the Mosin is safely stowed (bolt closed), do the actual swap
 	current_item = new_item
 	update_item_visibility()
 	
@@ -56,9 +72,11 @@ func switch_to(new_item: EquippedItem):
 			flashlight_light_hand.visible = false
 			flashlight_light_belt.visible = true
 	else:
-		# If the player hasn't picked up the flashlight yet, FORCE both off!
 		flashlight_light_hand.visible = false
 		flashlight_light_belt.visible = false
+		
+	# Unblock the swapping mechanic
+	is_switching = false
 
 func update_item_visibility():
 	mosin_mesh.visible = (current_item == EquippedItem.MOSIN)
