@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://b02g77qmp3dcr"]
+
+[ext_resource type="Script" uid="uid://bkhh7k3dy0ngx" path="res://scripts/bullet_casing.gd" id="1_6gkip"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pq6cw"]
+albedo_color = Color(1, 1, 0.188235, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6gkip"]
+data = PackedVector3Array(0.154508, 1, 0.475528, -0.404509, 1, 0.293893, 0, 1, 0, 0.154508, 1, 0.475528, 0.5, 1, 0, 0.5, -1, 0, 0.5, 1, 0, 0.154508, 1, 0.475528, 0, 1, 0, 0.154509, 1, -0.475528, 0.5, 1, 0, 0, 1, 0, 0.5, 1, 0, 0.154509, 1, -0.475528, 0.154509, -1, -0.475528, 0.5, -1, 0, 0.154508, -1, 0.475528, 0.154508, 1, 0.475528, -0.404509, -1, 0.293893, 0.154508, -1, 0.475528, 0.5, -1, 0, 0.154509, -1, -0.475528, 0.5, -1, 0, 0.5, 1, 0, 0.154509, -1, -0.475528, -0.404508, -1, -0.293893, 0.5, -1, 0, -0.404509, -1, 0.293893, -0.404508, -1, -0.293893, -0.404508, 1, -0.293893, -0.404509, 1, 0.293893, 0.154508, 1, 0.475528, 0.154508, -1, 0.475528, -0.404508, 1, -0.293893, -0.404509, 1, 0.293893, -0.404509, -1, 0.293893, -0.404508, 1, -0.293893, 0.154509, 1, -0.475528, 0, 1, 0, -0.404509, 1, 0.293893, -0.404508, 1, -0.293893, 0, 1, 0, 0.154509, 1, -0.475528, -0.404508, 1, -0.293893, -0.404508, -1, -0.293893, 0.154508, -1, 0.475528, -0.404509, -1, 0.293893, -0.404509, 1, 0.293893, -0.404508, -1, -0.293893, 0.154509, -1, -0.475528, 0.154509, 1, -0.475528, -0.404508, -1, -0.293893, -0.404509, -1, 0.293893, 0.5, -1, 0)
+
+[node name="BulletCasing" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_6gkip")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.03, 0, 0, 0, -1.74846e-10, -0.03, 0, 0.004, -1.31134e-09, 0, 2.06402e-07, 0.0365417)
+sides = 5
+material = SubResource("StandardMaterial3D_pq6cw")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.03, 0, 0, 0, -1.31134e-09, 0.03, 0, -0.03, -1.31134e-09, 0, 0, 0)
+sides = 5
+material = SubResource("StandardMaterial3D_pq6cw")
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.03, 0, 0, 0, -1.31134e-09, 0.03, 0, -0.03, -1.31134e-09, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_6gkip")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.03, 0, 0, 0, -8.74228e-11, -0.026, 0, 0.002, -1.1365e-09, 0, 1.80503e-07, 0.0329252)
+sides = 5
+material = SubResource("StandardMaterial3D_pq6cw")

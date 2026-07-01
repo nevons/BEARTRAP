@@ -1,4 +1,4 @@
-[gd_scene load_steps=167 format=4 uid="uid://dp3up1qky8mfq"]
+[gd_scene load_steps=175 format=4 uid="uid://dp3up1qky8mfq"]
 
 [ext_resource type="Script" uid="uid://bx5vdnhgg6epu" path="res://scripts/PLAYER.gd" id="1_r53wf"]
 [ext_resource type="AudioStream" uid="uid://csktmykqk26gj" path="res://assets/audio/footstep_wood/wood1.wav" id="2_hruy7"]
@@ -1488,6 +1488,50 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_06scy")
+
+[sub_resource type="CurveTexture" id="CurveTexture_8irta"]
+
+[sub_resource type="Gradient" id="Gradient_12bh3"]
+colors = PackedColorArray(0.0846899, 0.0846899, 0.0846899, 1, 0.758191, 0.758192, 0.758192, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ptbnk"]
+gradient = SubResource("Gradient_12bh3")
+
+[sub_resource type="Curve" id="Curve_pkihq"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.654412, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3qr5q"]
+curve = SubResource("Curve_pkihq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8irta"]
+lifetime_randomness = 0.6
+particle_flag_align_y = true
+inherit_velocity_ratio = 0.277
+direction = Vector3(0, 0, -1)
+spread = 15.0
+initial_velocity_min = 1.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, 1.5, 0)
+damping_min = 4.615
+damping_max = 10.0
+scale_curve = SubResource("CurveTexture_3qr5q")
+color_ramp = SubResource("GradientTexture1D_ptbnk")
+alpha_curve = SubResource("CurveTexture_8irta")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_12bh3"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.347817, 0.347817, 0.347817, 1)
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="BoxMesh" id="BoxMesh_ptbnk"]
+material = SubResource("StandardMaterial3D_12bh3")
+size = Vector3(0.05, 0.05, 0.05)
 
 [sub_resource type="Animation" id="Animation_n38qo"]
 length = 0.001
@@ -3072,6 +3116,30 @@ volume_db = 6.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.603541, 0, 2.17557e-06)
 stream = ExtResource("25_5jmb6")
 volume_db = 6.0
+
+[node name="MuzzlePoint" type="Marker3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.634044, 0.0512288, 2.29478e-06)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/MuzzlePoint"]
+visible = false
+light_color = Color(0.915603, 0.419914, 0, 1)
+light_energy = 16.0
+light_indirect_energy = 1.97
+light_volumetric_fog_energy = 1.162
+light_size = 0.182
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/MuzzlePoint"]
+transparency = 0.41
+emitting = false
+amount = 100
+one_shot = true
+explosiveness = 1.0
+randomness = 0.6
+process_material = SubResource("ParticleProcessMaterial_8irta")
+draw_pass_1 = SubResource("BoxMesh_ptbnk")
+
+[node name="EjectionPort" type="Marker3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.163034, 0.0454596, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Camera3D/HandContainer/MosinMesh"]
 libraries = {

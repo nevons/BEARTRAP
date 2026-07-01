@@ -10,6 +10,14 @@ const MAX_AMMO = 5
 var current_ammo = 0 # Starting empty for testing!
 var reserve_ammo = 0 # Starting with a small pool
 
+#effects
+@onready var muzzle_flash_light = $low_poly_mosin/MuzzlePoint/OmniLight3D
+@onready var muzzle_particles = $low_poly_mosin/MuzzlePoint/GPUParticles3D
+@onready var ejection_port = $low_poly_mosin/EjectionPort
+
+# Load the casing scene so we can spawn it
+var casing_scene = preload("res://scenes/bullet_casing.tscn")
+
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 func _ready():
@@ -45,8 +53,10 @@ func action_fire():
 	# Fire the weapon
 	current_ammo -= 1
 	sync_ammo_to_ui()
-	print("BANG! Ammo left: ", current_ammo, " | Reserve: ", reserve_ammo)
 	
+	#muzzle flash
+	muzzle_particles.emitting = true
+	_flash_muzzle_light()
 	# recoil and kick
 	var player = get_tree().get_first_node_in_group("player")
 	if player and player.has_method("fire_recoil"):
@@ -66,6 +76,7 @@ func action_cycle_bolt():
 	current_state = WeaponState.CYCLING
 	if anim_player.has_animation("cycle_bolt"):
 		anim_player.play("cycle_bolt")
+		_eject_casing()
 		await anim_player.animation_finished
 		
 	if current_ammo > 0:
@@ -112,7 +123,6 @@ func start_clip_reload():
 		current_state = WeaponState.READY
 		sync_ammo_to_ui()
 		print("Clip loaded! Chamber: ", current_ammo, " | Reserve: ", reserve_ammo)
-
 
 func start_looping_reload():
 	var player = get_tree().get_first_node_in_group("player")
@@ -188,3 +198,28 @@ func prepare_to_stow() -> void:
 		# and sets the state back to READY or EMPTY
 		while current_state == WeaponState.RELOADING or current_state == WeaponState.CYCLING:
 			await get_tree().process_frame
+
+func _flash_muzzle_light():
+	muzzle_flash_light.visible = true
+	# Wait for just 0.05 seconds (approx 3 frames at 60fps)
+	await get_tree().create_timer(0.05).timeout
+	muzzle_flash_light.visible = false
+
+func _eject_casing():
+	# 1. Spawn the casing
+	var casing = casing_scene.instantiate()
+	
+	# 2. Add it to the MAIN game world, not the gun! 
+	# If you add it to the gun, it will swing around when you move your mouse.
+	get_tree().root.add_child(casing)
+	
+	# 3. Match its starting position/rotation to the Ejection Port
+	casing.global_transform = ejection_port.global_transform
+	
+	# 4. Throw it! (Up and to the right)
+	# Adjust these vector numbers to make it eject harder or softer
+	var ejection_force = ejection_port.global_transform.basis * Vector3(2.0, 3.0, 0)
+	casing.apply_impulse(ejection_force)
+	
+	# Add a random spin so it tumbles through the air
+	casing.apply_torque_impulse(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))

@@ -111,3 +111,4 @@ toggle_flashlight={
 
 3d_physics/layer_1="Environment"
 3d_physics/layer_2="Interactables"
+3d_physics/layer_3="Debris"
