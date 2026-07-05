@@ -121,6 +121,28 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -4.23529, 0.573049, -25
 [node name="ammo3" parent="." instance=ExtResource("9_uacia")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -4.51532, 0.573049, -25.9369)
 
+[node name="cover_1" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4201, 2.95541, 0)
+use_collision = true
+size = Vector3(2.07764, 5.39633, 1)
+
+[node name="Node3D2" type="Node3D" parent="cover_1" groups=["cover_point"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.55202, -1.01532)
+
+[node name="Node3D" type="Node3D" parent="cover_1" groups=["cover_point"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.54062, 0.805655)
+
+[node name="cover_2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.15022, 1.38842, 0)
+use_collision = true
+size = Vector3(2.07764, 1.89398, 1)
+
+[node name="Node3D" type="Node3D" parent="cover_2" groups=["cover_point"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.850731)
+
+[node name="Node3D2" type="Node3D" parent="cover_2" groups=["cover_point"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.16117)
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_uacia")
 
@@ -298,5 +320,44 @@ height = 0.714844
 
 [node name="nazi" parent="." instance=ExtResource("10_yk7ts")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.54224, 0)
+
+[node name="vision" parent="nazi/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.999534, -0.0305322, 2.74018e-07, 0.0305322, 0.999534, 1.35907e-08, -2.74306e-07, -5.21795e-09, 1, -0.0163217, 3.73333, -0.000152637)
+
+[node name="invis_wall" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.61, 5.82019, -15.044)
+transparency = 1.0
+cast_shadow = 0
+use_collision = true
+collision_layer = 17
+collision_mask = 14
+size = Vector3(1, 10.6768, 59.9762)
+
+[node name="invis_wall2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.4679, 5.82019, -15.044)
+transparency = 1.0
+cast_shadow = 0
+use_collision = true
+collision_layer = 17
+collision_mask = 14
+size = Vector3(1, 10.6768, 59.9762)
+
+[node name="invis_wall3" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0312738, 5.82019, -44.5154)
+transparency = 1.0
+cast_shadow = 0
+use_collision = true
+collision_layer = 17
+collision_mask = 14
+size = Vector3(1, 10.6768, 27.9958)
+
+[node name="invis_wall4" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0312738, 5.82019, 14.4806)
+transparency = 1.0
+cast_shadow = 0
+use_collision = true
+collision_layer = 17
+collision_mask = 14
+size = Vector3(1, 10.6768, 27.9958)
 
 [editable path="nazi"]

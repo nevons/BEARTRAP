@@ -2746,6 +2746,7 @@ _data = {
 
 [node name="PLAYER" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
+collision_mask = 9
 floor_stop_on_slope = false
 script = ExtResource("1_r53wf")
 grass_steps = Array[AudioStream]([ExtResource("2_u2uwr"), ExtResource("3_4ufat"), ExtResource("4_dd1qt"), ExtResource("5_0pmnk")])
