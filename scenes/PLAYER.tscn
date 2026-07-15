@@ -1,4 +1,4 @@
-[gd_scene load_steps=175 format=4 uid="uid://dp3up1qky8mfq"]
+[gd_scene load_steps=177 format=4 uid="uid://dp3up1qky8mfq"]
 
 [ext_resource type="Script" uid="uid://bx5vdnhgg6epu" path="res://scripts/PLAYER.gd" id="1_r53wf"]
 [ext_resource type="AudioStream" uid="uid://csktmykqk26gj" path="res://assets/audio/footstep_wood/wood1.wav" id="2_hruy7"]
@@ -40,6 +40,8 @@
 [ext_resource type="Texture2D" uid="uid://bj164shd037vk" path="res://assets/textures/reloadring/whitering.webp" id="36_yobr8"]
 [ext_resource type="Texture2D" uid="uid://bdt34o45it10a" path="res://assets/textures/battery/battery inner.png" id="38_qftmw"]
 [ext_resource type="PackedScene" uid="uid://f61fsis6k5y3" path="res://scenes/health_component.tscn" id="40_8irta"]
+[ext_resource type="Texture2D" uid="uid://diopaom6o5jql" path="res://assets/textures/health_bar/empty-removebg-preview.png" id="40_ptbnk"]
+[ext_resource type="Texture2D" uid="uid://d4ab2qnscr12r" path="res://assets/textures/health_bar/full-removebg-preview1.png" id="41_ptbnk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a1u3h"]
 
@@ -2768,6 +2770,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.266513, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.287777, 0)
 current = true
 
+[node name="AimRay" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -1000)
+collide_with_areas = true
+debug_shape_custom_color = Color(0, 1, 0, 1)
+
 [node name="InteractionRay" type="RayCast3D" parent="Head/Camera3D"]
 target_position = Vector3(0, 0, -2)
 collision_mask = 2
@@ -3312,6 +3319,23 @@ texture_under = ExtResource("38_qftmw")
 texture_progress = ExtResource("38_qftmw")
 tint_under = Color(0, 0, 0, 1)
 tint_over = Color(0.308882, 0.882449, 2.31028e-06, 1)
+
+[node name="HealthContainer" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 124.0
+offset_bottom = 115.0
+
+[node name="HealthBar" type="TextureProgressBar" parent="UI/HealthContainer"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 27.0
+offset_right = 602.0
+offset_bottom = 466.0
+scale = Vector2(0.39, 0.39)
+value = 100.0
+fill_mode = 3
+texture_under = ExtResource("40_ptbnk")
+texture_progress = ExtResource("41_ptbnk")
 
 [node name="FootstepRay" type="RayCast3D" parent="."]
 target_position = Vector3(0, -1.2, 0)

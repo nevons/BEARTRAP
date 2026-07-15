@@ -12,6 +12,11 @@ var speed
 var _is_crouching : bool = false
 var _is_running : bool = false
 
+# --- Fall Damage Tracking ---
+var _was_on_floor: bool = true
+var _last_y_velocity: float = 0.0
+const SAFE_FALL_SPEED: float = -12.0 # Anything faster than -12 m/s will cause damage
+
 # --- Recoil System ---
 var target_recoil: Vector3 = Vector3.ZERO
 var current_recoil: Vector3 = Vector3.ZERO
@@ -49,13 +54,7 @@ const BOB_FREQ_CROUCH = 6.0
 const BOB_AMP_CROUCH = 0.005
 
 var bob_timer: float = 0.0
-
-# --- Flashlight System ---
-@onready var hand_light: SpotLight3D = $Head/Camera3D/HandContainer/FlashlightMesh/SpotLight3D
-@onready var belt_light: SpotLight3D = $BeltPosition/FlashlightLight
-@onready var flashlight_mesh = $Head/Camera3D/HandContainer/FlashlightMesh
-# Update this path to exactly where your battery bar is:
-@onready var battery_ui: TextureProgressBar = $UI/BatteryContainer/TextureProgressBar 
+ 
 
 var max_battery: float = 100.0
 var current_battery: float = 100.0
@@ -98,7 +97,19 @@ var is_flashlight_on: bool = false
 @onready var ammo_label: Label = $UI/AmmoContainer/Label
 @onready var reload_ring: TextureProgressBar = $UI/Reticle/ReloadRing
 var reload_tween: Tween
+#Health Bar:
+@onready var health_bar: TextureProgressBar = $UI/HealthContainer/HealthBar
+@onready var health_comp = $HealthComponent
 
+#	 --- Flashlight System ---
+@onready var hand_light: SpotLight3D = $Head/Camera3D/HandContainer/FlashlightMesh/SpotLight3D
+@onready var belt_light: SpotLight3D = $BeltPosition/FlashlightLight
+@onready var flashlight_mesh = $Head/Camera3D/HandContainer/FlashlightMesh
+# Update this path to exactly where your battery bar is:
+@onready var battery_ui: TextureProgressBar = $UI/BatteryContainer/TextureProgressBar
+
+var tex_full = preload("res://assets/textures/health_bar/full-removebg-preview.png")
+var tex_low = preload("res://assets/textures/health_bar/low-removebg-preview.png")
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -114,6 +125,9 @@ func _ready():
 	# Hide the entire battery container on startup
 	if $UI/BatteryContainer:
 		$UI/BatteryContainer.visible = false
+		
+	health_comp.health_changed.connect(_update_health_ui)
+	_update_health_ui(health_comp.current_hp, health_comp.max_hp)
 	
 func _unhandled_input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -138,9 +152,26 @@ func _input(event):
 		is_flashlight_on = !is_flashlight_on
 
 func _physics_process(delta):
-	# Add the gravity.
+	# --- GRAVITY & FALL DAMAGE ---
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+		_was_on_floor = false
+		_last_y_velocity = velocity.y # Constantly record how fast we are falling
+	else:
+		# We are on the floor. Did we JUST land this frame?
+		if not _was_on_floor:
+			# If we were falling faster than our safe speed, calculate the impact!
+			if _last_y_velocity < SAFE_FALL_SPEED:
+				# Subtract the safe speed so small jumps don't hurt, then multiply for lethality
+				var fall_severity = abs(_last_y_velocity) - abs(SAFE_FALL_SPEED)
+				var damage = int(fall_severity * 10.0) # Multiply by 5 for crunchy damage scaling
+				
+				if health_comp:
+					health_comp.take_damage(damage)
+					# Optional: violently shake the camera to sell the impact
+					fire_recoil() 
+					
+			_was_on_floor = true
 
 	
 	# Get the input vector direction
@@ -471,3 +502,23 @@ func pickup_flashlight():
 	# Reveal the UI container!
 	if $UI/BatteryContainer:
 		$UI/BatteryContainer.visible = true
+
+func _update_health_ui(current, maximum):
+	if not health_bar: return
+		
+	health_bar.max_value = maximum
+	health_bar.value = current
+	
+	# Calculate the percentage
+	var health_percent = float(current) / float(maximum)
+	
+	# If health is at or below 30%, tint the white scribble red!
+	if health_percent <= 0.30:
+		# Using a gritty, dark blood red (R, G, B)
+		health_bar.tint_progress = Color(0.8, 0.0, 0.0) 
+	else:
+		# Reset back to pure white if they heal
+		health_bar.tint_progress = Color.WHITE
+		
+	# DEBUG PRINT: Watch the console to see your exact health math when you fall
+	print("UI Updated - HP: ", current, " | Percent: ", health_percent)

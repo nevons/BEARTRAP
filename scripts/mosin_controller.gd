@@ -68,6 +68,24 @@ func action_fire():
 		await anim_player.animation_finished
 	
 	current_state = WeaponState.NEED_BOLT
+	
+	# --- DEAL DAMAGE ---
+	if player and player.has_node("Head/Camera3D/AimRay"):
+		var aim_ray = player.get_node("Head/Camera3D/AimRay")
+		aim_ray.force_raycast_update() # Ensure the physics engine calculates this frame
+		
+		if aim_ray.is_colliding():
+			var hit_object = aim_ray.get_collider()
+			
+			# Check if we hit the Nazi (or anything with a health component)
+			if hit_object.has_node("health_component"):
+				var target_health = hit_object.get_node("health_component")
+				target_health.take_damage(50) # Assuming max is 100, this is a 2-shot kill!
+				
+				# Trigger the flinch animation on the enemy
+				if hit_object.has_method("take_hit"):
+					hit_object.take_hit()
+					print("Target Hit! Enemy HP: ", target_health.current_hp)
 
 func action_cycle_bolt():
 	if current_state != WeaponState.NEED_BOLT:

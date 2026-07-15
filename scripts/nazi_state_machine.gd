@@ -235,6 +235,7 @@ func _do_surprise_attack() -> void:
 	# 2. Take the initial shot
 	if ammo > 0:
 		anim.play("shoot_anim")
+		_fire_at_player()
 		await anim.animation_finished
 		ammo -= 1
 		
@@ -326,6 +327,7 @@ func _do_peek_and_fire() -> void:
 		if ammo <= 0 or state != PEEK_FIRE:
 			break
 		anim.play("shoot_anim")
+		_fire_at_player()
 		await anim.animation_finished
 		ammo -= 1
 		if i < shots_per_peek - 1:
@@ -382,6 +384,7 @@ func _do_open_fire() -> void:
 			if state != FIRING or ammo <= 0:
 				break
 			anim.play("shoot_anim")
+			_fire_at_player()
 			await anim.animation_finished
 			ammo -= 1
 			await get_tree().create_timer(0.18).timeout
@@ -452,14 +455,17 @@ func _on_patrol_timer_timeout() -> void:
 	# Toggle back and forth between IDLE and PATROL
 	if state == IDLE:
 		state = PATROL
-		nav_agent.target_position = global_position + Vector3(
-			randf_range(-8.0, 8.0), 0.0, randf_range(-8.0, 8.0))
+		var random_pos = global_position + Vector3(randf_range(-8.0, 8.0), 0.0, randf_range(-8.0, 8.0))
+		
+		# FORCE the random point to snap to the nearest valid NavMesh location
+		var safe_pos = NavigationServer3D.map_get_closest_point(nav_agent.get_navigation_map(), random_pos)
+		nav_agent.target_position = safe_pos
+		
 		_patrol_timer.wait_time = randf_range(4.0, 8.0)
 	elif state == PATROL:
 		state = IDLE
 		_patrol_timer.wait_time = randf_range(2.0, 5.0)
 		
-	# Restart the timer for the next cycle
 	_patrol_timer.start()
 
 func _on_nav_finished() -> void:
@@ -488,3 +494,22 @@ func _check_line_of_sight(player: Node3D) -> bool:
 		var col = vrc.get_collider()
 		return col == player or col.name == "PLAYER"
 	return false
+
+func _fire_at_player() -> void:
+	if not _player: return
+	
+	# Add a slight random spread so the AI doesn't have 100% perfect aimbot
+	var inaccuracy = Vector3(randf_range(-0.6, 0.6), randf_range(-0.6, 0.6), 0)
+	var aim_point = _player.global_position + Vector3.UP * 1.0 + inaccuracy
+	
+	vrc.target_position = vrc.to_local(aim_point)
+	vrc.force_raycast_update()
+	
+	if vrc.is_colliding():
+		var hit = vrc.get_collider()
+		if hit == _player or hit.name == "PLAYER":
+			# If the raycast hits the player, deal damage to them!
+			if hit.has_node("HealthComponent"):
+				var player_hp = hit.get_node("HealthComponent")
+				player_hp.take_damage(20) # 5 shots to kill the player
+				print("Player was shot! HP left: ", player_hp.current_hp)
