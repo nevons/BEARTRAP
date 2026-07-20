@@ -108,9 +108,6 @@ var reload_tween: Tween
 # Update this path to exactly where your battery bar is:
 @onready var battery_ui: TextureProgressBar = $UI/BatteryContainer/TextureProgressBar
 
-var tex_full = preload("res://assets/textures/health_bar/full-removebg-preview.png")
-var tex_low = preload("res://assets/textures/health_bar/low-removebg-preview.png")
-
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")

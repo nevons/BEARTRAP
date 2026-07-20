@@ -1,4 +1,4 @@
-[gd_scene load_steps=177 format=4 uid="uid://dp3up1qky8mfq"]
+[gd_scene load_steps=178 format=4 uid="uid://dp3up1qky8mfq"]
 
 [ext_resource type="Script" uid="uid://bx5vdnhgg6epu" path="res://scripts/PLAYER.gd" id="1_r53wf"]
 [ext_resource type="AudioStream" uid="uid://csktmykqk26gj" path="res://assets/audio/footstep_wood/wood1.wav" id="2_hruy7"]
@@ -20,7 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://dehl06l8ys77n" path="res://assets/audio/footstep_default/hardboot_generic5.wav" id="17_n38qo"]
 [ext_resource type="Script" uid="uid://bps77v42avmy2" path="res://scripts/hand_container.gd" id="18_ua83o"]
 [ext_resource type="Script" uid="uid://bm6h3lkh28lvx" path="res://scripts/mosin_controller.gd" id="19_n38qo"]
-[ext_resource type="AudioStream" uid="uid://by4rp7i0uqilh" path="res://assets/audio/mosin_sounds/bolt_open.mp3" id="20_n38qo"]
+[ext_resource type="AudioStream" uid="uid://dgtytn1wnxwrp" path="res://assets/audio/mosin_sounds/mosin_cycle_waw.mp3" id="20_ptbnk"]
 [ext_resource type="AudioStream" uid="uid://vopdsvrhp2r5" path="res://assets/audio/mosin_sounds/bolt_close.mp3" id="21_unvn8"]
 [ext_resource type="AudioStream" uid="uid://byr2cdf4ttlxp" path="res://assets/audio/mosin_sounds/bullet_loading.mp3" id="22_g5e30"]
 [ext_resource type="AudioStream" uid="uid://bfi7vhqd1lcxq" path="res://assets/audio/mosin_sounds/chambering.mp3" id="23_5jmb6"]
@@ -1491,6 +1491,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_06scy")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ptbnk"]
+albedo_color = Color(0.362829, 0.362829, 0.362829, 1)
+
 [sub_resource type="CurveTexture" id="CurveTexture_8irta"]
 
 [sub_resource type="Gradient" id="Gradient_12bh3"]
@@ -1514,7 +1517,7 @@ direction = Vector3(0, 0, -1)
 spread = 15.0
 initial_velocity_min = 1.0
 initial_velocity_max = 8.0
-gravity = Vector3(0, 1.5, 0)
+gravity = Vector3(-2, 10, -2)
 damping_min = 4.615
 damping_max = 10.0
 scale_curve = SubResource("CurveTexture_3qr5q")
@@ -1800,10 +1803,10 @@ tracks/0/path = NodePath("low_poly_mosin:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2.01),
-"transitions": PackedFloat32Array(1, 2.21914, 2.21914),
+"times": PackedFloat32Array(0, 1, 1.6, 2.01),
+"transitions": PackedFloat32Array(1, 2.21914, 2.21914, 2.21914),
 "update": 0,
-"values": [Vector3(0, 1.5708, 0), Vector3(0, 0.724312, 0.645772), Vector3(0, 1.5708, 0)]
+"values": [Vector3(0, 1.5708, 0), Vector3(0, 0.724312, 0.645772), Vector3(0, 0.724312, 0.645772), Vector3(0, 1.5708, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1812,10 +1815,10 @@ tracks/1/path = NodePath("low_poly_mosin:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1, 2.01),
-"transitions": PackedFloat32Array(1, 2.21914, 2.21914),
+"times": PackedFloat32Array(0, 1, 1.6, 2.01),
+"transitions": PackedFloat32Array(1, 2.21914, 2.21914, 2.21914),
 "update": 0,
-"values": [Vector3(0.439, -0.218, -0.725), Vector3(0.439, -0.033, -0.545), Vector3(0.439, -0.218, -0.725)]
+"values": [Vector3(0.439, -0.218, -0.725), Vector3(0.439, -0.033, -0.545), Vector3(0.439, -0.033, -0.545), Vector3(0.439, -0.218, -0.725)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -3104,7 +3107,7 @@ mesh = SubResource("ArrayMesh_3xbgn")
 skeleton = NodePath("")
 
 [node name="bolt_open" type="AudioStreamPlayer3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
-stream = ExtResource("20_n38qo")
+stream = ExtResource("20_ptbnk")
 
 [node name="bolt_close" type="AudioStreamPlayer3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
 stream = ExtResource("21_unvn8")
@@ -3118,7 +3121,8 @@ stream = ExtResource("23_5jmb6")
 [node name="rifle_shot" type="AudioStreamPlayer3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.603541, 0, 2.17557e-06)
 stream = ExtResource("23_g5e30")
-volume_db = 6.0
+volume_db = -9.0
+max_db = 0.0
 
 [node name="gun_click" type="AudioStreamPlayer3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.603541, 0, 2.17557e-06)
@@ -3137,6 +3141,7 @@ light_volumetric_fog_energy = 1.162
 light_size = 0.182
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Head/Camera3D/HandContainer/MosinMesh/low_poly_mosin/MuzzlePoint"]
+material_override = SubResource("StandardMaterial3D_ptbnk")
 transparency = 0.41
 emitting = false
 amount = 100
