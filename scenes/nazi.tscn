@@ -3462,7 +3462,7 @@ mesh = SubResource("ArrayMesh_s7sta")
 skin = SubResource("Skin_5gyeg")
 
 [node name="vision" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(0.999793, 0.00735347, -0.018948, 0.0024249, 0.882443, 0.470413, 0.0201797, -0.470361, 0.882243, -0.649963, 4.04966, -0.177056)
+transform = Transform3D(0.999793, 0.00735356, -0.018948, 0.00242481, 0.882443, 0.470413, 0.0201797, -0.470361, 0.882243, -0.649963, 4.04966, -0.177056)
 bone_name = "head"
 bone_idx = 3
 
@@ -3505,7 +3505,6 @@ stream = ExtResource("11_poikh")
 pitch_scale = 1.05
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-debug_enabled = true
 debug_path_custom_color = Color(1, 0, 1, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
